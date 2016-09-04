@@ -17,8 +17,8 @@
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/bcps?characterEncoding=utf-8">
 		</property>
-		<property name="username" value="root"></property>
-		<property name="password" value="123"></property>
+		<property name="username" value="bcps"></property>
+		<property name="password" value="1234"></property>
 		<property name="initialSize" value="10"></property>
 <!--连接池的最小个数-->
 		<property name="maxTotal" value="50"></property>
@@ -63,12 +63,21 @@
 		p:sessionFactory-ref="sessionFactory">
 	</bean>
 	<!--注解驱动  若spring基于注解配置-->
-<tx:annotation-driven transaction-manager="transactionManager" /> 
+<tx:annotation-driven  transaction-manager="transactionManager" /> 
+
+<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+
+
 		 <aop:config>
 	<!--expression中过滤  第一个*好代表所有的返回类型 然后是包路径两个点号（“..”）表示所有路径  
 com.s2sh..bo.*Bo.tx*(..) 表示com.demo.service下所有路径的包中，以Service为后缀的类中，以tx开头任意参数的的方法使用事务-->	
 		  <aop:pointcut expression="execution(* com.demo.service.*Service.tx*(..))" id="interceptorPointCuts"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts"/>
+	
 	</aop:config>
 		
 </beans>
