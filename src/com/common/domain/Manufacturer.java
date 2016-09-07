@@ -1,12 +1,14 @@
 package com.common.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,9 +21,10 @@ public class Manufacturer implements java.io.Serializable {
 	// Fields
 
 	private Integer number;
-	private Medicinal medicinal;
 	private String address;
 	private String phone;
+	private String name;
+	private Set<Medicine> medicines = new HashSet<Medicine>(0);
 
 	// Constructors
 
@@ -30,15 +33,19 @@ public class Manufacturer implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Manufacturer(Medicinal medicinal) {
-		this.medicinal = medicinal;
+	public Manufacturer(String address, String phone, String name) {
+		this.address = address;
+		this.phone = phone;
+		this.name = name;
 	}
 
 	/** full constructor */
-	public Manufacturer(Medicinal medicinal, String address, String phone) {
-		this.medicinal = medicinal;
+	public Manufacturer(String address, String phone, String name,
+			Set<Medicine> medicines) {
 		this.address = address;
 		this.phone = phone;
+		this.name = name;
+		this.medicines = medicines;
 	}
 
 	// Property accessors
@@ -53,17 +60,7 @@ public class Manufacturer implements java.io.Serializable {
 		this.number = number;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	public Medicinal getMedicinal() {
-		return this.medicinal;
-	}
-
-	public void setMedicinal(Medicinal medicinal) {
-		this.medicinal = medicinal;
-	}
-
-	@Column(name = "address", length = 45)
+	@Column(name = "address", nullable = false, length = 45)
 	public String getAddress() {
 		return this.address;
 	}
@@ -72,13 +69,31 @@ public class Manufacturer implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "phone", length = 45)
+	@Column(name = "phone", nullable = false, length = 45)
 	public String getPhone() {
 		return this.phone;
 	}
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	@Column(name = "name", nullable = false, length = 45)
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "manufacturer")
+	public Set<Medicine> getMedicines() {
+		return this.medicines;
+	}
+
+	public void setMedicines(Set<Medicine> medicines) {
+		this.medicines = medicines;
 	}
 
 }

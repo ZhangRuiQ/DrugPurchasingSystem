@@ -1,5 +1,5 @@
 package com.common.dao;
 
-public class IUserDao {
+public interface  IUserDao {
 
 }

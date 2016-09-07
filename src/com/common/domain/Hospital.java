@@ -37,6 +37,17 @@ public class Hospital implements java.io.Serializable {
 	public Hospital() {
 	}
 
+	/** minimal constructor */
+	public Hospital(HealthBureau healthBureau, String name, String passwd,
+			String address, String phone, String grade) {
+		this.healthBureau = healthBureau;
+		this.name = name;
+		this.passwd = passwd;
+		this.address = address;
+		this.phone = phone;
+		this.grade = grade;
+	}
+
 	/** full constructor */
 	public Hospital(HealthBureau healthBureau, String name, String passwd,
 			String address, String phone, String grade, Set<Order> orders) {
@@ -62,7 +73,7 @@ public class Hospital implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "higher")
+	@JoinColumn(name = "higher", nullable = false)
 	public HealthBureau getHealthBureau() {
 		return this.healthBureau;
 	}
@@ -71,7 +82,7 @@ public class Hospital implements java.io.Serializable {
 		this.healthBureau = healthBureau;
 	}
 
-	@Column(name = "name", length = 45)
+	@Column(name = "name", nullable = false, length = 45)
 	public String getName() {
 		return this.name;
 	}
@@ -80,7 +91,7 @@ public class Hospital implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "passwd", length = 45)
+	@Column(name = "passwd", nullable = false, length = 45)
 	public String getPasswd() {
 		return this.passwd;
 	}
@@ -89,7 +100,7 @@ public class Hospital implements java.io.Serializable {
 		this.passwd = passwd;
 	}
 
-	@Column(name = "address", length = 45)
+	@Column(name = "address", nullable = false, length = 45)
 	public String getAddress() {
 		return this.address;
 	}
@@ -98,7 +109,7 @@ public class Hospital implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "phone", length = 45)
+	@Column(name = "phone", nullable = false, length = 45)
 	public String getPhone() {
 		return this.phone;
 	}
@@ -107,7 +118,7 @@ public class Hospital implements java.io.Serializable {
 		this.phone = phone;
 	}
 
-	@Column(name = "grade", length = 45)
+	@Column(name = "grade", nullable = false, length = 45)
 	public String getGrade() {
 		return this.grade;
 	}

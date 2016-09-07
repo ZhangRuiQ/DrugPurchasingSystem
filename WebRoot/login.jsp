@@ -197,7 +197,7 @@ html,body {
 
 		<div class="form-group">
 <div class="col-xs-6 "  >
-<p class="text-center remove-margin"><small>忘记密码？</small> <a href="javascript:void(0)" ><small>找回</small></a>
+<p class="text-center remove-margin"><small>忘记密码？</small> <a href="javascript:_clicks()" ><small>找回</small></a>
 						</p></div>
 
 				</div>
@@ -214,7 +214,7 @@ html,body {
 </body>
    <script src="bootstrap/vendors/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
-
+//验证码更换
 function _change() {
 		/*
 		1. 获取<img>元素
@@ -225,12 +225,30 @@ function _change() {
 		
 	}
 	
+	//验证码更换
 	$("#vertifyCodeImage").click(function(){
 		
 			var ele = document.getElementById("vertifyCodeImage");
 		ele.src = "<c:url value='/common/vertifyImage.action'/>?xxx=" + new Date().getTime();
 	
 	});
+	
+	//离开焦点
+	$("#verfity").blur(function(){
+	alert("afdsadfasd");
+		ajax({url:"/common/verificationCode",async:false});	
+
+});
+	
+	//登录
+		function _clicks(){
+	
+	
+		
+	
+	
+	}
+	
 
 </script>
 </html>

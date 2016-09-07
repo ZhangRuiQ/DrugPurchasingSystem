@@ -21,10 +21,10 @@ public class OrderItem implements java.io.Serializable {
 
 	private String id;
 	private Order order;
-	private Integer mediumId;
+	private Integer medicineId;
 	private Integer number;
 	private double amount;
-	private Medicinal medicinal;
+	private Medicine medicine;
 
 	// Constructors
 
@@ -32,14 +32,23 @@ public class OrderItem implements java.io.Serializable {
 	public OrderItem() {
 	}
 
-	/** full constructor */
-	public OrderItem(Order order, Integer mediumId, Integer number,
-			double amount, Medicinal medicinal) {
+	/** minimal constructor */
+	public OrderItem(Order order, Integer medicineId, Integer number,
+			double amount) {
 		this.order = order;
-		this.mediumId = mediumId;
+		this.medicineId = medicineId;
 		this.number = number;
 		this.amount = amount;
-		this.medicinal = medicinal;
+	}
+
+	/** full constructor */
+	public OrderItem(Order order, Integer medicineId, Integer number,
+			double amount, Medicine medicine) {
+		this.order = order;
+		this.medicineId = medicineId;
+		this.number = number;
+		this.amount = amount;
+		this.medicine = medicine;
 	}
 
 	// Property accessors
@@ -55,7 +64,7 @@ public class OrderItem implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "order")
+	@JoinColumn(name = "order", nullable = false)
 	public Order getOrder() {
 		return this.order;
 	}
@@ -64,16 +73,16 @@ public class OrderItem implements java.io.Serializable {
 		this.order = order;
 	}
 
-	@Column(name = "mediumId")
-	public Integer getMediumId() {
-		return this.mediumId;
+	@Column(name = "medicineId", nullable = false)
+	public Integer getMedicineId() {
+		return this.medicineId;
 	}
 
-	public void setMediumId(Integer mediumId) {
-		this.mediumId = mediumId;
+	public void setMedicineId(Integer medicineId) {
+		this.medicineId = medicineId;
 	}
 
-	@Column(name = "number")
+	@Column(name = "number", nullable = false)
 	public Integer getNumber() {
 		return this.number;
 	}
@@ -82,7 +91,7 @@ public class OrderItem implements java.io.Serializable {
 		this.number = number;
 	}
 
-	@Column(name = "amount", precision = 22, scale = 0)
+	@Column(name = "amount", nullable = false, precision = 22, scale = 0)
 	public double getAmount() {
 		return this.amount;
 	}
@@ -92,12 +101,12 @@ public class OrderItem implements java.io.Serializable {
 	}
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "orderItem")
-	public Medicinal getMedicinal() {
-		return this.medicinal;
+	public Medicine getMedicine() {
+		return this.medicine;
 	}
 
-	public void setMedicinal(Medicinal medicinal) {
-		this.medicinal = medicinal;
+	public void setMedicine(Medicine medicine) {
+		this.medicine = medicine;
 	}
 
 }
