@@ -36,19 +36,27 @@
     
     <!-- 公有 -->
   <package name="common" namespace="/common" extends="default">
-  <action name="vertifyImage" class="com.common.action.VerfityImageAction" method="getImage">
-  <result name="success" type="stream">
-  	<param name="contentType">image/jpeg</param>
-  <param name="inputName">imageStream</param>
-  <param name="bufferSize">1024</param>
+  
+  		<!-- 验证码图片生成-->
+	<action name="vertifyImage" class="com.common.action.UserAction"
+		method="getImage">
+		<result name="success" type="stream">
+			<param name="contentType">image/jpeg</param>
+			<param name="inputName">imageStream</param>
+			<param name="bufferSize">1024</param>
+		</result>
+	</action>
 
-  
-  
-  </result>
- 
-  </action>
-  
-  </package>
+
+		<!-- 验证输入验证码时候正确 -->
+	<action name="verificationCode" class="com.common.action.UserAction" method="verificationCode">
+		<result name="success" type="redirectAction">
+			common/verificationCode
+		</result>
+
+	</action>
+
+</package>
 
     <!-- Add packages here -->
 

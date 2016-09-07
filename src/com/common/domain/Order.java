@@ -38,6 +38,15 @@ public class Order implements java.io.Serializable {
 	public Order() {
 	}
 
+	/** minimal constructor */
+	public Order(Hospital hospital, Date orderTime, double amount,
+			Integer status) {
+		this.hospital = hospital;
+		this.orderTime = orderTime;
+		this.amount = amount;
+		this.status = status;
+	}
+
 	/** full constructor */
 	public Order(Hospital hospital, Date orderTime, double amount,
 			Integer status, Date returnTime, String returnReason,
@@ -64,7 +73,7 @@ public class Order implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "hospitalId")
+	@JoinColumn(name = "hospitalId", nullable = false)
 	public Hospital getHospital() {
 		return this.hospital;
 	}
@@ -73,7 +82,7 @@ public class Order implements java.io.Serializable {
 		this.hospital = hospital;
 	}
 
-	@Column(name = "order_time", length = 19)
+	@Column(name = "order_time", nullable = false, length = 19)
 	public Date getOrderTime() {
 		return this.orderTime;
 	}
@@ -82,7 +91,7 @@ public class Order implements java.io.Serializable {
 		this.orderTime = orderTime;
 	}
 
-	@Column(name = "amount", precision = 22, scale = 0)
+	@Column(name = "amount", nullable = false, precision = 22, scale = 0)
 	public double getAmount() {
 		return this.amount;
 	}
@@ -91,7 +100,7 @@ public class Order implements java.io.Serializable {
 		this.amount = amount;
 	}
 
-	@Column(name = "status")
+	@Column(name = "status", nullable = false)
 	public Integer getStatus() {
 		return this.status;
 	}

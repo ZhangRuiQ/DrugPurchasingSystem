@@ -1,5 +1,10 @@
 package com.common.service;
 
-public interface IUserService {
+import java.io.IOException;
+import java.io.InputStream;
 
+public interface IUserService {
+	public  InputStream getImage() throws IOException;
+
+	public String getText();
 }

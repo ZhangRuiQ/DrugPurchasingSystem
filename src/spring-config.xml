@@ -82,5 +82,16 @@ com.s2sh..bo.*Bo.tx*(..) 表示com.demo.service下所有路径的包中，以Ser
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts"/>
 	
 	</aop:config>
+	
+	
 		
-</beans>
+		 <bean id="userdao" class="com.common.dao.UserDao"
+		  p:sessionFactory-ref="sessionFactory">
+	
+		 </bean>
+		 <bean id="userService" class="com.common.service.UserService">
+		 	<property name="userdao">
+		 		<ref bean="userdao" />
+		 	</property>
+		 </bean>
+		 </beans>
