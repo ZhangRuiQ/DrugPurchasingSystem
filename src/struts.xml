@@ -13,21 +13,42 @@
         <default-action-ref name="index" />
 
         <global-results>
-            <result name="error">/WEB-INF/jsp/error.jsp</result>
+            <result name="error">/error.jsp</result>
         </global-results>
 
         <global-exception-mappings>
             <exception-mapping exception="java.lang.Exception" result="error"/>
         </global-exception-mappings>
-
-        <action name="index">
-            <result>
-         		index.jsp
-            </result>
-        </action>
     </package>
+    
+    
+    <!-- 监管机构 -->
+    <package name="healthBureau" namespace="/healthBureau" extends="default"> 
+    
+    
+    </package>
+    
+    <!-- 医疗机构 -->
+<package name="hosptial" namespace="/hospital" extends="default"> 
+    
+    
+    </package>
+    
+    <!-- 公有 -->
+  <package name="common" namespace="/common" extends="default">
+  <action name="vertifyImage" class="com.common.action.VerfityImageAction" method="getImage">
+  <result name="success" type="stream">
+  	<param name="contentType">image/jpeg</param>
+  <param name="inputName">imageStream</param>
+  <param name="bufferSize">1024</param>
 
   
+  
+  </result>
+ 
+  </action>
+  
+  </package>
 
     <!-- Add packages here -->
 
