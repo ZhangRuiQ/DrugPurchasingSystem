@@ -1,0 +1,136 @@
+index的jq
+
+
+目录行id
+<li>
+<a href="index_public.html" target="iframe1" id="catalogue" >公告</a> 
+</li>
+
+--------------------------------------------------------------------------------------------------------
+主页  设置及其以下选项    目录及其选项   用户及其以下选项   意见反馈的父标签<li>的class=navigation
+主页  设置以下选项    目录选项   用户以下选项   意见反馈的<a>标签为class=navigation_event
+
+
+>>>>清空active
+		clear_nav()
+
+>>>当点击哪一个时，iframe页面跳转时，该选项变为active
+		
+		//找到触发对象包含父亲节点navigation的节点
+		var parent=$(this).parent();
+		while(!$(parent).hasClass("navigation"))
+		{
+			parent=$(parent).parent();
+		}
+
+		//添加active
+		$(parent).addClass("active");
+
+	
+>>>>>修改目录栏的a-》href及a中的内容
+	var Str_a=$(this).attr("href");
+		var Str_text=$(this).text();
+		if (Str_text=="主页") 
+		{
+
+		}
+		else{
+			$("#catalogue").attr("href",Str_a);
+			$("#catalogue").text(Str_text);
+			}
+
+
+
+
+总结：
+		//导航栏触发
+		$(".navigation_event").click(function(){
+			clear_nav();
+			//找到触发对象包含父亲节点navigation的节点
+			var parent=$(this).parent();
+			while(!$(parent).hasClass("navigation"))
+				{
+					parent=$(parent).parent();
+				}
+
+			$(parent).addClass("active");
+
+			var Str_a=$(this).attr("href");
+			var Str_text=$(this).text();
+			if (Str_text=="主页") 
+				{
+
+				}
+			else{
+				$("#catalogue").attr("href",Str_a);
+				$("#catalogue").text(Str_text);
+				}
+		
+	});
+
+	
+
+------------------------------------------------------------------------------------------------------------------------
+药品目录、采购单管理、退货单管理、统计分析。修改密码 为class=inner_navigation
+主页的父标签0《li》的id="index_jsp"
+
+保持主页为active状态
+        --》如果主页为active则完成
+	--》如果不是则清空active  使得主页变为active
+			
+			//active是否在主页上
+			if($("#index_jsp").hasClass("active"))
+			{
+					alert("dsafas");
+			}
+			else
+			{
+				clear_nav();
+				$("#index_jsp").addClass("active");
+
+			}
+修改目录栏的a-》href及a中的内容
+			var Str_a=$(this).attr("href");
+			var Str_text=$(this).text();
+
+				$("#catalogue").attr("href",Str_a);
+				$("#catalogue").text(Str_text);
+
+总结：
+				//内部导航栏触发
+				$(".inner_navigation").click(function(){
+			//active是否在主页上
+			if($("#index_jsp").hasClass("active"))
+			{
+				
+			}
+			else
+			{
+				clear_nav();
+				$("#index_jsp").addClass("active");
+
+			}
+
+			var Str_a=$(this).attr("href");
+			var Str_text=$(this).text();
+
+				$("#catalogue").attr("href",Str_a);
+				$("#catalogue").text(Str_text);
+		
+	});
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+函数清空主导航栏的active状态
+function  clear_nav(){
+$(".navigation").removeClass("active");
+};
+  
+
+
+
+
