@@ -66,7 +66,7 @@ public class UserAction extends ActionSupport implements SessionAware,RequestAwa
 			Hospital h=userService.loginAtHospital(userdto);
 			if(h!=null){
 				
-				session.put("user", h);
+				session.put("hospital", h);
 				return "success1";
 			}
 		}
@@ -74,7 +74,7 @@ public class UserAction extends ActionSupport implements SessionAware,RequestAwa
 			HealthBureau h=userService.loginAtHealthBureau(userdto);
 			if(h!=null)
 				{
-				session.put("user", h);
+				session.put("healthBureau", h);
 				return "success2";
 				}
 			
