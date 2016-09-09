@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
-encoding//WebRoot/main.jsp=UTF-8
-encoding//WebRoot/medicine_maintain.jsp=UTF-8
+encoding//WebRoot/healthBureau/back_search.jsp=UTF-8
+encoding//WebRoot/healthBureau/index.jsp=UTF-8
+encoding//WebRoot/healthBureau/medicine_maintain.jsp=UTF-8
 encoding//src/spring-config.xml=UTF-8

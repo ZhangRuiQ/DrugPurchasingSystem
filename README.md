@@ -1,2 +1,2 @@
 # DrugPurchasingSystem
-Drug centralized purchasing system
+药品集中采购系统

@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
-
+		
+		<import resource="spring-healthBureau-config.xml"/>
+		<import resource="spring-hospital-config.xml"/>
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-		<!--可更改数据库连接池 -->
+					<!--可更改数据库连接池-->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/bcps?characterEncoding=utf-8">
 		</property>
-		<property name="username" value="dcps"></property>
+		<property name="username" value="bcps"></property>
 		<property name="password" value="1234"></property>
-		<!--连接池的最小个数 -->
 		<property name="initialSize" value="10"></property>
-		<!--连接池的最大个数 -->
+<!--连接池的最小个数-->
 		<property name="maxTotal" value="50"></property>
-		<!--连接池的允许空闲连接最大个数 -->
+<!--连接池的最大个数-->
 		<property name="maxIdle" value="30"></property>
-		<!--连接池的允许空闲连接最小个数 -->
+<!--连接池的允许空闲连接最大个数-->
 		<property name="minIdle" value="20"></property>
-		<!--连接池中空闲连接允许停留的时间 -->
+<!--连接池的允许空闲连接最大个数-->
 		<property name="timeBetweenEvictionRunsMillis" value="6000">
-		</property>
-		<!--数值越大与数据库交互越不频繁 -->
+		<!--连接池中空闲连接允许停留的时间-->
+</property>
 		<property name="minEvictableIdleTimeMillis" value="18000">
-		</property>
+			<!--数值越大与数据库交互越不频繁-->
+</property>	
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -47,35 +51,47 @@
 					true
 				</prop>
 			</props>
-		</property>
-
+		</property>	
+		
 		<!-- 使用注解方式配置domian -->
-		<property name="packagesToScan" value="com.common.domain.">
-		</property>
-	</bean>
-
-	<!-- 增删改的时候需要开启事务 -->
-	<!-- 事务代理器的基类:提供事务模板 -->
+<property name="packagesToScan" value="com.common.domain.">
+			</property> 
+			</bean>
+			
+			<!-- 增删改的时候需要开启事务-->
+<!-- 事务代理器的基类:提供事务模板-->
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
 		p:sessionFactory-ref="sessionFactory">
 	</bean>
-	
-	<!--注解驱动 若spring基于注解配置 -->
-	
-	<tx:annotation-driven transaction-manager="transactionManager" />
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	<!--注解驱动  若spring基于注解配置-->
+<tx:annotation-driven  transaction-manager="transactionManager" /> 
+
+<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="*" propagation="REQUIRED"/>
 		</tx:attributes>
-	</tx:advice>	
-	<aop:config>
-		<!--expression中过滤 第一个*好代表所有的返回类型 然后是包路径两个点号（“..”）表示所有路径 com.s2sh..bo.*Bo.tx*(..) 
-			表示com.demo.service下所有路径的包中，以Service为后缀的类中，以tx开头任意参数的的方法使用事务 -->
-		<aop:pointcut expression="execution(* com.demo.service.*Service.tx*(..))"
-			id="interceptorPointCuts" />
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts" />
-	</aop:config>
+	</tx:advice>
 
-</beans>
+
+		 <aop:config>
+	<!--expression中过滤  第一个*好代表所有的返回类型 然后是包路径两个点号（“..”）表示所有路径  
+com.s2sh..bo.*Bo.tx*(..) 表示com.demo.service下所有路径的包中，以Service为后缀的类中，以tx开头任意参数的的方法使用事务-->	
+		  <aop:pointcut expression="execution(* com.demo.service.*Service.tx*(..))" id="interceptorPointCuts"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts"/>
+	
+	</aop:config>
+	
+	
+		
+		 <bean id="userdao" class="com.common.dao.UserDao"
+		  p:sessionFactory-ref="sessionFactory">
+	
+		 </bean>
+		 <bean id="userService" class="com.common.service.UserService">
+		 	<property name="userdao">
+		 		<ref bean="userdao" />
+		 	</property>
+		 </bean>
+		 </beans>

@@ -24,6 +24,7 @@ public class HealthBureau implements java.io.Serializable {
 	private String passwd;
 	private String address;
 	private String phone;
+	private String name;
 	private Set<Hospital> hospitals = new HashSet<Hospital>(0);
 
 	// Constructors
@@ -32,12 +33,21 @@ public class HealthBureau implements java.io.Serializable {
 	public HealthBureau() {
 	}
 
-	/** full constructor */
-	public HealthBureau(String passwd, String address, String phone,
-			Set<Hospital> hospitals) {
+	/** minimal constructor */
+	public HealthBureau(String passwd, String address, String phone, String name) {
 		this.passwd = passwd;
 		this.address = address;
 		this.phone = phone;
+		this.name = name;
+	}
+
+	/** full constructor */
+	public HealthBureau(String passwd, String address, String phone,
+			String name, Set<Hospital> hospitals) {
+		this.passwd = passwd;
+		this.address = address;
+		this.phone = phone;
+		this.name = name;
 		this.hospitals = hospitals;
 	}
 
@@ -53,7 +63,7 @@ public class HealthBureau implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "passwd", length = 45)
+	@Column(name = "passwd", nullable = false, length = 45)
 	public String getPasswd() {
 		return this.passwd;
 	}
@@ -62,7 +72,7 @@ public class HealthBureau implements java.io.Serializable {
 		this.passwd = passwd;
 	}
 
-	@Column(name = "address", length = 45)
+	@Column(name = "address", nullable = false, length = 45)
 	public String getAddress() {
 		return this.address;
 	}
@@ -71,13 +81,22 @@ public class HealthBureau implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "phone", length = 45)
+	@Column(name = "phone", nullable = false, length = 45)
 	public String getPhone() {
 		return this.phone;
 	}
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	@Column(name = "name", nullable = false, length = 45)
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "healthBureau")

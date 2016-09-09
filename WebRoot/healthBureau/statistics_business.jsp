@@ -1,0 +1,168 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %> 
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+     <link href="<c:url value='/bootstrap/bootstrap/css/bootstrap.min.css'/>" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<form>
+<table class="table table-bordered">
+<tr>
+<td>
+    <label for="yearInput">年份 :</label>
+   
+
+      <input name="year" type="text" id="yearInput" placeholder="year">
+    </td>
+
+    <td>
+    <label for="hospitalInput">医院名称 :</label>
+      <input name="hospital" type="text" id="hospitalInput" placeholder="hospital">
+    </td>
+
+      <td>
+    <label for="businessmanInput">供货商 :</label>
+      <input name="businessman" type="text" id="businessmanInput" placeholder="businessman">
+    </td>
+         <td>
+    <label for="orderNumberInput">采购单号 :</label>
+      <input name="orderNumber" type="text" id="orderNumberInput" placeholder="orderNumber">
+    </td>
+<td>
+<input type="submit" class="btn btn-primary" value="查询">
+
+</td>
+  </tr>
+
+<tr>
+<td>
+    <label for="serialNumberInput">流水号 :</label>
+   
+
+      <input name="serialNumber" type="text" id="serialNumberInput" placeholder="serialNumber">
+    </td>
+
+    <td>
+    <label for="commonNameInput">通用名 :</label>
+      <input name="commonName" type="text" id="commonNameInput" placeholder="commonName">
+    </td>
+
+      <td>
+    <label for="purchaseTimeInput">采购时间 :</label>
+      <input name="purchaseTime" type="text" id="purchaseTimeInput" placeholder="格式：YYYY/mm-YYYY/mm">
+    </td>
+         <td>
+    <label for="purchasingStatusInput">采购状态 :</label>
+      <select name="purchasingStatus" id="purchasingStatusInput">
+      <option value=""></option>
+      	<option value="">订单已创建</option>
+      	<option value="">退货中</option>
+      	<option value="">退货完成</option>
+      	<option value="">待发货</option>
+      	<option value="">发货中</option>
+      	<option value="">货物入库</option>
+      </select>
+    </td>
+<td>
+<button class="btn btn-primary" >导出</button>
+</td>
+  </tr>
+
+
+
+  </table>
+</form>
+<div class="navbar navbar-inner ">
+            <a class="brand" href="#">交易明细查询</a>
+     </div>
+
+     <table class="table table-bordered">
+<thead>
+	<tr>
+		<th>采购单编号</th>
+		<th>医院名称</th>
+		<th>药品流水号</th>
+		<th>建单时间</th>
+		<th>通用名</th>
+		<th>剂型</th>
+		<th>规格</th>
+		<th>中标价</th>
+		<th>交易价</th>
+		<th>采购量</th>
+		<th>采购金额</th>
+		<th>入库量</th>
+		<th>发票号</th>
+		<th>药品批号</th>
+		<th>采购状态</th>
+		<th>......</th>
+	</tr>
+</thead>
+<tbody>
+
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+
+</tbody>
+     </table>
+	<div class="pagination pagination-right">
+  <ul>
+    <li><a href="#">首页</a></li>
+    <li><a href="#">上一页</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">下一页</a></li>
+    <li><a href="#">尾页</a></li>
+  </ul>
+</div>
+
+
+  
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="vendors/jquery-1.9.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
