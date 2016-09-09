@@ -38,26 +38,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <table  class="table table-bordered">
 <tr>
 <td><b>单位名称：</b></td>
-<td>xxxx医院</td>
+<td>${hospital.name }医院</td>
+</tr>
+<tr>
+<tr>
+<td><b>用户id：</b></td>
+<td>${hospital.id }</td>
 </tr>
 <tr>
 <td><b>级别：</b></td>
-<td>三级甲等医院</td>
+<td>${hospital.grade }</td>
 </tr>
 <tr>
 <td><b>联系电话：</b></td>
-<td>65465465465</td>
+<td>${hospital.phone }</td>
 </tr>
 <tr>
 <td><b>地址</b>：</td>
-<td>中华人民共和国xxx省xxx市xxx区xxx..........</td>
+<td>${hospital.address }</td>
 </tr>
 </table>
 </div>
 </div>
   <div style="margin-top:1%" class="row-fluid">
     <div class="offset10">
-    <a href="modify_passwd.html" class="btn btn-primary">修改密码</a>
+    <a href="<c:url value='/hospital/modify_passwd.jsp'/>"  class="btn btn-primary">修改密码</a>
 </div>
 </div>
 

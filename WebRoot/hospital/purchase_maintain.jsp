@@ -93,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </center>
         <br/>
       <div class="navbar navbar-inner ">
-            <div class="muted pull-left" >采购单列表</div>
+            <div class="muted pull-left" >采购单修改</div>
      </div>
      <div class="block-content collapse in">
         <div >    

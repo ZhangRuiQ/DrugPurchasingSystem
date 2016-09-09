@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-
+    <title>My JSP 'index.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -21,26 +20,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link href="<c:url value='/bootstrap/bootstrap/css/bootstrap.min.css'/>" rel="stylesheet" media="screen">
-      <style type="text/css">
-  p{ margin-left:85%};
-  
-  </style>
+
   </head>
-      <body>
-    <div class="jumbotron">
-    <br>
-    <br>
-    <br>
-    <br>
-  <h1><small>Hello, 如果有什么意见，请麻烦您填写意见........</small></h1>
-
-  <p><a class="btn btn-primary btn-lg" href="<c:url value='/hospital/root_propose.jsp'/>" role="button">意见反馈</a></p>
-</div>
-
-
+  
+  <body>
+    This is my JSP page. <br>
+  
   </body>
-   <script src="<c:url value='/bootstrap/vendors/jquery-1.9.1.min.js'/>"></script>
-        <script src="<c:url value='/bootstrap/bootstrap/js/bootstrap.min.js'/>"></script>
- 
 </html>

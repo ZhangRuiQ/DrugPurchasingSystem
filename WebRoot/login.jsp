@@ -21,6 +21,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	
+
 <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/bootstrap/css/bootstrap.min3.3.css'/>" />
 
 <style type="text/css">
@@ -226,23 +228,6 @@ html,body {
 </body>
 <script src="bootstrap/vendors/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
-//创建request对象
-function createXMLHttpRequest() {
-	try {
-		return new XMLHttpRequest();//大多数浏览器
-	} catch (e) {
-		try {
-			return ActvieXObject("Msxml2.XMLHTTP");//IE6.0
-		} catch (e) {
-			try {
-				return ActvieXObject("Microsoft.XMLHTTP");//IE5.5及更早版本	
-			} catch (e) {
-				
-				throw e;
-			}
-		}
-	}
-}
 
 
 

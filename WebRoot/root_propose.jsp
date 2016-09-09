@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div style="margin-top:2%" class="row-fluid">
     <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href="#">意见反馈</a>
+    <a class="brand" href="<c:url value='/hospital/root_propose.jsp'/>">意见反馈</a>
 </div>
 
 

@@ -3,8 +3,11 @@ package com.common.action;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+import java.util.Set;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.RequestAware;
@@ -12,6 +15,8 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.common.domain.HealthBureau;
 import com.common.domain.Hospital;
+import com.common.dto.HealthBureauDto;
+import com.common.dto.HospitalDto;
 import com.common.dto.UserDto;
 import com.common.service.IUserService;
 import com.common.service.UserService;
@@ -49,7 +54,7 @@ public class UserAction extends ActionSupport implements SessionAware,RequestAwa
 	}
 	
 	//用户验证
-	public String login(){
+	public String login() throws IllegalAccessException, InvocationTargetException{
 		
 		session.remove("information");
 		session.remove("failuser");
@@ -66,7 +71,13 @@ public class UserAction extends ActionSupport implements SessionAware,RequestAwa
 			Hospital h=userService.loginAtHospital(userdto);
 			if(h!=null){
 				
-				session.put("hospital", h);
+				HospitalDto dest=new HospitalDto();
+				HealthBureauDto d=new HealthBureauDto();
+				BeanUtils.copyProperties(dest, h);
+				BeanUtils.copyProperties(d, h.getHealthBureau());
+				dest.setHealthBureauDto(d);
+
+				session.put("hospital", dest);
 				return "success1";
 			}
 		}
@@ -74,7 +85,10 @@ public class UserAction extends ActionSupport implements SessionAware,RequestAwa
 			HealthBureau h=userService.loginAtHealthBureau(userdto);
 			if(h!=null)
 				{
-				session.put("healthBureau", h);
+				HealthBureauDto dest=new HealthBureauDto();
+
+				BeanUtils.copyProperties(dest, h);
+				session.put("healthBureau", dest);
 				return "success2";
 				}
 			
@@ -84,14 +98,14 @@ public class UserAction extends ActionSupport implements SessionAware,RequestAwa
 		
 		return "fail";
 	}
-	
-	//找回密码
-	public String resetPasswd(){
+	public String logout(){
+		session.remove("healthBureau");
+		session.remove("hospital");
 		
-		return null;
+		return SUCCESS;
 	}
 	
-	
+	//获取验证码图片
 	public String getImage(){
 		
 		try {

@@ -30,8 +30,15 @@
     
     <!-- 医疗机构 -->
 <package name="hosptial" namespace="/hospital" extends="default"> 
+		<!-- 不跳转页面 -->
+    <action name="null_*" class="com.demo.action.hospital.HospitalAction" method="{1}"></action>
+    <!-- 页面跳转 -->
+    <action name="jump_*" class="com.demo.action.hospital.HospitalAction" method="{1}">
+    <result name="forword">
+    /hospital/{1}.jsp
+    </result>
     
-    
+    </action>
     </package>
     
     <!-- 公有 -->
@@ -52,6 +59,7 @@
 	<action name="verificationCode" class="com.common.action.UserAction" method="verificationCode">
 		
 	</action>
+	<!-- 登录 -->
 	<action name="login" class="com.common.action.UserAction" method="login">
 		<result name="success1" type="redirect">
 		/hospital/index.jsp
@@ -65,10 +73,16 @@
 		<result name="fail" type="redirect">
 		/login.jsp
 		</result>
-	
+		
 	
 	</action>
-
+<!-- 注销 -->
+<action name="logout" class="com.common.action.UserAction" method="logout" >
+<result name="success" type="redirect">
+/login.jsp
+</result>
+</action>
+<!-- 建议反馈 -->
 </package>
 
     <!-- Add packages here -->
