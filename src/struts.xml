@@ -7,7 +7,7 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="true" />
-
+	<constant name="struts.i18n.encoding" value="UTF-8" />
     <package name="default" namespace="/" extends="struts-default">
 
         <default-action-ref name="index" />
@@ -48,12 +48,25 @@
 	</action>
 
 
-		<!-- 验证输入验证码时候正确 -->
+		<!-- 判断验证码是否正确-->
 	<action name="verificationCode" class="com.common.action.UserAction" method="verificationCode">
-		<result name="success" type="redirectAction">
-			common/verificationCode
+		
+	</action>
+	<action name="login" class="com.common.action.UserAction" method="login">
+		<result name="success1" type="redirect">
+		/hospital/index.jsp
+		
 		</result>
-
+		
+		<result name="success2" type="redirect">
+		/healthBureau/index.jsp
+		
+		</result>
+		<result name="fail" type="redirect">
+		/login.jsp
+		</result>
+	
+	
 	</action>
 
 </package>
