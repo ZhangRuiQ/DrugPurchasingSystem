@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            
                             <li class="navigation">
                         
-                                <a href="<c:url value='/root_propose.jsp'/>" class="navigation_event" target="iframe1">意见反馈</a>
+                                <a href="<c:url value='/hospital/root_propose.jsp'/>" class="navigation_event" target="iframe1">意见反馈</a>
                             	
                             </li>
                         </ul>
