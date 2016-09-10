@@ -2,14 +2,11 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <<<<<<< HEAD
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %> 
-=======
->>>>>>> 13bcecabbb0f578ebf915cfc31da9ed0ea72c47c
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html class="no-js">
     
@@ -287,8 +284,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </body>
 
 </html>
-=======
->>>>>>> 13bcecabbb0f578ebf915cfc31da9ed0ea72c47c
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
