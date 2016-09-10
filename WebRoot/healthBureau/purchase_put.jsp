@@ -124,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><a href="#">入库</a </td>
+                        <td><a href="#">入库</a> </td>
                     </tr>
                     <tr class="even gradeC">
                         <td><input type="checkbox" /></td>

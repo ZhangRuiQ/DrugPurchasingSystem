@@ -39,19 +39,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <table  class="table table-bordered">
 <tr>
 <td><b>单位名称：</b></td>
-<td>xxxx医院</td>
+<td>${healthBureau.name }</td>
 </tr>
 <tr>
-<td><b>级别：</b></td>
-<td>三级甲等医院</td>
+<td><b>用户id：</b></td>
+<td>${healthBureau.id }</td>
 </tr>
 <tr>
 <td><b>联系电话：</b></td>
-<td>65465465465</td>
+<td>${healthBureau.phone }</td>
 </tr>
 <tr>
 <td><b>地址</b>：</td>
-<td>中华人民共和国xxx省xxx市xxx区xxx..........</td>
+<td>${healthBureau.address }</td>
 </tr>
 </table>
 </div>

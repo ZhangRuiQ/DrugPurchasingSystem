@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> 嘉大卫生室 <i class="caret"></i>
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> ${healthBureau.name } <i class="caret"></i>
 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </li> 
 
                                     <li>
-                                        <a tabindex="-1" href="<c:url value='/login.jsp' />">注销</a>
+                                        <a tabindex="-1" href="<c:url value='/common/logout.action'/>">注销</a>
                                     </li>
                                     
 
