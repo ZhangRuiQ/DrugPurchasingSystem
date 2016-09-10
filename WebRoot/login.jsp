@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>药品集中采购系统登录界面</title>
-    
+    <meta http-equiv="charset" content="UTF-8">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -21,6 +21,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	
+
 <link rel="stylesheet" type="text/css" href="<c:url value='/bootstrap/bootstrap/css/bootstrap.min3.3.css'/>" />
 
 <style type="text/css">
@@ -105,115 +107,134 @@ html,body {
 </style>
 
   </head>
-  
- <body>
-<div class="box">
+
+<body>
+	<div class="box">
 		<div class="login-box">
 			<div class="login-title text-center">
-				<h1><small>药品集中采购系统</small></h1>
+				<h1>
+					<small>药品集中采购系统</small>
+				</h1>
 			</div>
 			<div class="login-content ">
-			<div class="form">
-			<form action="#" method="post" >
-				<div class="form-group">
-					<div class="col-xs-12  ">
-						<div class="input-group">
-							<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-							<input type="text" id="username" name="username" class="form-control" placeholder="用户名">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-12  ">
-						<div class="input-group">
-							<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-							<input type="password" id="password" name="password" class="form-control" placeholder="密码">
-						</div>
-					</div>
-				</div>
-
-
-
-	<div class="form-group">
-					<div class="col-xs-5  ">
-						<div class="input-group">
-							<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-							<input type="text" id="verfity" name="verfity" class="form-control" placeholder="验证码"/>
-						</div>
-					</div>
-					<div class="col-xs-2  ">
-                    <div class="input-group">
+				<div class="form">
+					<form id="myForm" action="<c:url value='/common/login.action'/>" method="post">
 					
-					<img id="vertifyCodeImage" src="<c:url value='/common/vertifyImage.action'/>">
-					
-                    </div>
-					</div>
-					<div class="col-xs-5  ">
-                    <div class="input-group">
-					 <a href="javascript:_change()">
-					看不清，换一张
-					</a>
-                    </div>
-					</div>
+						<div class="form-group">
+							<div class="col-xs-12  ">
+								<div class="input-group">
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-user"></span></span> <input type="text"
+										id="username" name="userdto.userId" class="form-control" value="${failuser }"
+										placeholder="用户名">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-12  ">
+								<div class="input-group">
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-lock"></span></span> <input
+										type="password" id="password" name="userdto.passwd"
+										class="form-control" placeholder="密码">
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="form-group">
+							<div class="col-xs-5  ">
+								<div class="input-group">
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-lock"></span></span> <input type="text"
+										id="verfity" name="vertifyCodeText" class="form-control"
+										placeholder="验证码" />
+								</div>
+							</div>
+							<div class="col-xs-2  ">
+								<div class="input-group">
+
+									<img id="vertifyCodeImage"
+										src="<c:url value='/common/vertifyImage.action'/>">
+
+								</div>
+							</div>
+							<div class="col-xs-5  ">
+								<div class="input-group">
+									<a href="javascript:_change()"> 看不清，换一张 </a>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						<div class="form-group">
+
+							<div class="col-xs-4">
+								<div>
+									<label> <input type="radio" name="userdto.type"
+										id="optionsRadios1" value="1" checked> 医疗机构
+									</label>
+								</div>
+								<div class="  ">
+									<label> <input type="radio" name="userdto.type"
+										id="optionsRadios2" value="2"> 监管机构
+									</label>
+								</div>
+							</div>
+
+
+							<div class="col-xs-3  ">
+								<button id="bto" type="button" class="btn btn-sm btn-info">
+									<span class="glyphicon glyphicon-off"></span> 登录
+								</button>
+							</div>
+
+							<div class="col-xs-4 input-group ">
+								<div id="information" style=" text-align: center; color: red;">${information }</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-xs-6 col-xs-offset-3 ">
+								<p class="text-center remove-margin">
+									<small>忘记密码？</small> <a href="javascript:_clicks()"><small>找回</small></a>
+								</p>
+							</div>
+
+						</div>
+
+
+					</form>
+
 				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				<div class="form-group">
-				
-				<div class="col-xs-4 col-xs-offset-">
-					<div class=" ">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-    医疗机构
-  </label>
-</div>
-<div class="  ">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-   监管机构
-  </label>
-</div>
-		</div>		
-				
-				
-					<div class="col-xs-4  ">
-						<button type="submit" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-off"></span> 登录</button>
-					</div>
-
-</div>
-
-		<div class="form-group">
-<div class="col-xs-6 "  >
-<p class="text-center remove-margin"><small>忘记密码？</small> <a href="javascript:_clicks()" ><small>找回</small></a>
-						</p></div>
-
-				</div>
-			
-		
-			</form>
-
 			</div>
 		</div>
 	</div>
-</div>
-
 
 </body>
-   <script src="bootstrap/vendors/jquery-1.9.1.min.js"></script>
+<script src="bootstrap/vendors/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
+
+
+
+
+
+//---------------------------------------------------------------------
+
 //验证码更换
 function _change() {
 		/*
@@ -223,8 +244,7 @@ function _change() {
 		var ele = document.getElementById("vertifyCodeImage");
 		ele.src = "<c:url value='/common/vertifyImage.action'/>?xxx=" + new Date().getTime();
 		
-	}
-	
+	};
 	//验证码更换
 	$("#vertifyCodeImage").click(function(){
 		
@@ -232,22 +252,53 @@ function _change() {
 		ele.src = "<c:url value='/common/vertifyImage.action'/>?xxx=" + new Date().getTime();
 	
 	});
-	
+
+
+	//---------------------------------------------------------------------
 	//离开焦点
 	$("#verfity").blur(function(){
-	alert("afdsadfasd");
-		ajax({url:"/common/verificationCode",async:false});	
+	
+		
+		var str=$("#verfity").val();
+		$.ajax({url:"<c:url value='/common/verificationCode.action'/>",
+			type:"POST",
+			data: {vertifyCodeText:$("#verfity").val()},
+			async:true,
+			cache:false,
+			success:function(data){
+				$("#information").text(data);
+			}
+			
+		
+	
+		});	
 
 });
 	
 	//登录
-		function _clicks(){
+	$("#bto").click(function(){
+		
+		if(($.trim($("#username").val()))=="" ||($.trim($("#password").val()))=="")
+			{	
+			
+				var str="账号或密码不为空";
+				$("#information").text(str);
+			}
+		else{
+			$("#bto").attr("disabled","disabled");
+			
+			$("#myForm").submit();
+			
+		}
+		
+		});
+		
 	
-	
+		
 		
 	
 	
-	}
+	
 	
 
 </script>

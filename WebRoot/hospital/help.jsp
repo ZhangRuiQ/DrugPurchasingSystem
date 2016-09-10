@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div style="margin-top:2%" class="row-fluid">
     <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href="#">操作手册</a>
+    <a class="brand" href="<c:url value='/hospital/null_DownloadBrochure'/>">操作手册</a>
 </div>
 
 

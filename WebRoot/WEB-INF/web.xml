@@ -22,5 +22,48 @@
         <filter-name>struts2</filter-name>
         <url-pattern>*.action</url-pattern>
     </filter-mapping>
+    
+    
+    <filter>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenSessionInViewFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<filter>
+	
+  <filter-name>hospitalFilter</filter-name>
+  <filter-class>com.common.filter.HospitalFiler</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	<filter-name>hospitalFilter</filter-name>
+	<url-pattern>/hospital/*</url-pattern>
+	</filter-mapping>
+	<filter>
+	  <filter-name>healthBureauFilter </filter-name>
+  <filter-class>com.common.filter.HealthBureauFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	<filter-name>healthBureauFilter</filter-name>
+	<url-pattern>/healthBureau/*</url-pattern>
+	</filter-mapping>
+    	<filter>
+	  <filter-name>LoginFilter </filter-name>
+  <filter-class>com.common.filter.LoginFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	<filter-name>LoginFilter</filter-name>
+	<url-pattern>/login.jsp</url-pattern>
+	</filter-mapping>
+    
 
   </web-app>

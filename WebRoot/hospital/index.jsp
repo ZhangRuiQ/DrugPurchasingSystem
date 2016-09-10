@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> 嘉大卫生室 <i class="caret"></i>
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>${hospital.name }<i class="caret"></i>
 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </li>
 
                                     <li>
-                                        <a tabindex="-1" href="<c:url value='/login.jsp'/>">注销</a>
+                                        <a tabindex="-1" href="<c:url value='/common/logout.action'/>">注销</a>
                                     </li>
                                     
 
@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            
                             <li class="navigation">
                         
-                                <a href="<c:url value='/hospital/root_propose.jsp'/>" class="navigation_event" target="iframe1">意见反馈</a>
+                                <a href="<c:url value='/root_propose.jsp'/>" class="navigation_event" target="iframe1">意见反馈</a>
                             	
                             </li>
                         </ul>
@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                               </a>
                             </div>
                             <div id="collapseOne" class="accordion-body collapse in">
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/medicine_search.jsp'/>" target="iframe1">药品目录查询</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_medicine_search.action' />" target="iframe1">药品目录查询</a></div>
                             </div>
                           </div>
                           <div class="accordion-group">
@@ -111,10 +111,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             <div id="collapseTwo" class="accordion-body collapse">
                             
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/purchase_new.jsp'/>" target="iframe1">采购单创建</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/purchase_search.jsp'/>" target="iframe1">采购单列表</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/purchase_maintain.jsp'/>" target="iframe1">采购单修改</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/purchase_put.jsp'/>" target="iframe1">采购入库</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_purchase_new.action'/>" target="iframe1">采购单创建</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_purchase_search.action'/>" target="iframe1">采购单列表</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_purchase_maintain.action'/>" target="iframe1">采购单修改</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_purchase_put.action'/>" target="iframe1">采购入库</a></div>
                             </div>
                           </div>
                           <div class="accordion-group">
@@ -124,8 +124,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                               </a>
                             </div>
                             <div id="collapseThree" class="accordion-body collapse">
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/back_new.jsp'/>" target="iframe1">退货单创建</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/back_search.jsp'/>" target="iframe1">退货单列表</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_back_new.action'/>" target="iframe1">退货单创建</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_back_search.action'/>" target="iframe1">退货单列表</a></div>
                         
                             </div>
                           </div>
@@ -136,10 +136,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                               </a>
                             </div>
                             <div id="collapseFour" class="accordion-body collapse">
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/statistics_medicine.jsp'/>" target="iframe1">按药品统计</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/statistics_hospital.jsp'/>" target="iframe1">按医院统计</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/statistics_supplier.jsp'/>" target="iframe1">按供应商统计</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/statistics_business.jsp'/>" target="iframe1">交易明细查询</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_statistics_medicine.jsp'/>" target="iframe1">按药品统计</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_statistics_hospital.jsp'/>" target="iframe1">按医院统计</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_statistics_supplier.jsp'/>" target="iframe1">按供应商统计</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_statistics_business.jsp'/>" target="iframe1">交易明细查询</a></div>
                             </div>
                           </div>
                         
