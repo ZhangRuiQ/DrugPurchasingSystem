@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,11 +19,10 @@ public class OrderItem implements java.io.Serializable {
 	// Fields
 
 	private String id;
+	private Medicine medicine;
 	private Order order;
-	private Integer medicineId;
 	private Integer number;
 	private double amount;
-	private Medicine medicine;
 
 	// Constructors
 
@@ -32,23 +30,13 @@ public class OrderItem implements java.io.Serializable {
 	public OrderItem() {
 	}
 
-	/** minimal constructor */
-	public OrderItem(Order order, Integer medicineId, Integer number,
-			double amount) {
-		this.order = order;
-		this.medicineId = medicineId;
-		this.number = number;
-		this.amount = amount;
-	}
-
 	/** full constructor */
-	public OrderItem(Order order, Integer medicineId, Integer number,
-			double amount, Medicine medicine) {
+	public OrderItem(Medicine medicine, Order order, Integer number,
+			double amount) {
+		this.medicine = medicine;
 		this.order = order;
-		this.medicineId = medicineId;
 		this.number = number;
 		this.amount = amount;
-		this.medicine = medicine;
 	}
 
 	// Property accessors
@@ -64,6 +52,16 @@ public class OrderItem implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "medicineId", nullable = false)
+	public Medicine getMedicine() {
+		return this.medicine;
+	}
+
+	public void setMedicine(Medicine medicine) {
+		this.medicine = medicine;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "order", nullable = false)
 	public Order getOrder() {
 		return this.order;
@@ -71,15 +69,6 @@ public class OrderItem implements java.io.Serializable {
 
 	public void setOrder(Order order) {
 		this.order = order;
-	}
-
-	@Column(name = "medicineId", nullable = false)
-	public Integer getMedicineId() {
-		return this.medicineId;
-	}
-
-	public void setMedicineId(Integer medicineId) {
-		this.medicineId = medicineId;
 	}
 
 	@Column(name = "number", nullable = false)
@@ -98,15 +87,6 @@ public class OrderItem implements java.io.Serializable {
 
 	public void setAmount(double amount) {
 		this.amount = amount;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "orderItem")
-	public Medicine getMedicine() {
-		return this.medicine;
-	}
-
-	public void setMedicine(Medicine medicine) {
-		this.medicine = medicine;
 	}
 
 }

@@ -9,4 +9,17 @@
 		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+		
+		
+		
+		<bean id="hospitalDao" class="com.demo.dao.hospital.HospitalDao"
+			p:sessionFactory-ref="sessionFactory">
+			
+		</bean>
+		
+		
+		<bean id="hospitalService"
+			class="com.demo.service.hospital.HospitalService" 
+			p:hospitalDao-ref="hospitalDao">
+		</bean>
 		</beans>
