@@ -20,7 +20,7 @@ public class Manufacturer implements java.io.Serializable {
 
 	// Fields
 
-	private Integer number;
+	private String number;
 	private String address;
 	private String phone;
 	private String name;
@@ -51,12 +51,12 @@ public class Manufacturer implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@GeneratedValue
-	@Column(name = "number", unique = true, nullable = false)
-	public Integer getNumber() {
+	@Column(name = "number", unique = true, nullable = false, length = 45)
+	public String getNumber() {
 		return this.number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 

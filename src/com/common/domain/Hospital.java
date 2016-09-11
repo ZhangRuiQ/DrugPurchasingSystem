@@ -72,7 +72,7 @@ public class Hospital implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "higher", nullable = false)
 	public HealthBureau getHealthBureau() {
 		return this.healthBureau;
@@ -127,7 +127,7 @@ public class Hospital implements java.io.Serializable {
 		this.grade = grade;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "hospital")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "hospital")
 	public Set<Order> getOrders() {
 		return this.orders;
 	}

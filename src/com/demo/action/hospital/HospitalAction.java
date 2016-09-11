@@ -1,13 +1,18 @@
 package com.demo.action.hospital;
 
+import java.util.List;
+
+import com.common.domain.Medicine;
 import com.common.dto.HospitalDto;
+import com.demo.service.hospital.IHospitalService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class HospitalAction extends ActionSupport {
-	
+	private IHospitalService hospitalService;
 	private String oldPasswd;
 	private String newPasswd;
 	private String information;
+	private List<Medicine> medicineList;
 	//修改密码
 	public String modifyPasswd(){
 		
@@ -21,6 +26,8 @@ public class HospitalAction extends ActionSupport {
 	}
 	//药品目录加载
 	public String medicine_search(){
+		medicineList=hospitalService.loadMedicines();
+		
 		return "forword";
 	}
 	//退货单创建
@@ -66,6 +73,19 @@ public class HospitalAction extends ActionSupport {
 	public void setInformation(String information) {
 		this.information = information;
 	}
+	public IHospitalService getHospitalService() {
+		return hospitalService;
+	}
+	public void setHospitalService(IHospitalService hospitalService) {
+		this.hospitalService = hospitalService;
+	}
+	public List<Medicine> getMedicineList() {
+		return medicineList;
+	}
+	public void setMedicineList(List<Medicine> medicineList) {
+		this.medicineList = medicineList;
+	}
+
 
 
 }

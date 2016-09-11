@@ -1,5 +1,8 @@
 package com.common.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,8 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,8 +22,7 @@ public class Medicine implements java.io.Serializable {
 
 	// Fields
 
-	private Integer number;
-	private OrderItem orderItem;
+	private String number;
 	private Manufacturer manufacturer;
 	private String name;
 	private String type;
@@ -29,6 +30,7 @@ public class Medicine implements java.io.Serializable {
 	private String stockBalance;
 	private double price;
 	private String status;
+	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
 
 	// Constructors
 
@@ -36,11 +38,9 @@ public class Medicine implements java.io.Serializable {
 	public Medicine() {
 	}
 
-	/** full constructor */
-	public Medicine(OrderItem orderItem, Manufacturer manufacturer,
-			String name, String type, String standard, String stockBalance,
-			double price, String status) {
-		this.orderItem = orderItem;
+	/** minimal constructor */
+	public Medicine(Manufacturer manufacturer, String name, String type,
+			String standard, String stockBalance, double price, String status) {
 		this.manufacturer = manufacturer;
 		this.name = name;
 		this.type = type;
@@ -50,26 +50,30 @@ public class Medicine implements java.io.Serializable {
 		this.status = status;
 	}
 
+	/** full constructor */
+	public Medicine(Manufacturer manufacturer, String name, String type,
+			String standard, String stockBalance, double price, String status,
+			Set<OrderItem> orderItems) {
+		this.manufacturer = manufacturer;
+		this.name = name;
+		this.type = type;
+		this.standard = standard;
+		this.stockBalance = stockBalance;
+		this.price = price;
+		this.status = status;
+		this.orderItems = orderItems;
+	}
+
 	// Property accessors
 	@Id
 	@GeneratedValue
-	@Column(name = "number", unique = true, nullable = false)
-	public Integer getNumber() {
+	@Column(name = "number", unique = true, nullable = false, length = 45)
+	public String getNumber() {
 		return this.number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		this.number = number;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	public OrderItem getOrderItem() {
-		return this.orderItem;
-	}
-
-	public void setOrderItem(OrderItem orderItem) {
-		this.orderItem = orderItem;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -134,6 +138,15 @@ public class Medicine implements java.io.Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "medicine")
+	public Set<OrderItem> getOrderItems() {
+		return this.orderItems;
+	}
+
+	public void setOrderItems(Set<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 }
