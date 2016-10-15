@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div style="margin-top:2%" class="row-fluid">
     <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href="<c:url value='/hospital/null_DownloadBrochure'/>">操作手册</a>
+    <a class="brand" href="<c:url value='/hospital/help.jsp'/>">操作手册</a>
 </div>
 
 
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--下载-->
   <div style="margin-top:1%" class="row-fluid">
     <div class="offset10">
-    <a class="btn btn-primary"><i class="icon-download  icon-white"></i>下载手册</a>
+     <a class="btn btn-primary" target="_blank" href="<c:url value='/hospital/download_downloadBrochure.action'/>"><i class="icon-download  icon-white"></i>下载手册</a>
 </div>
 </div>
 

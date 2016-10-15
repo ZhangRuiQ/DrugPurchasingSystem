@@ -50,7 +50,6 @@ public class Manufacturer implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@GeneratedValue
 	@Column(name = "number", unique = true, nullable = false, length = 45)
 	public String getNumber() {
 		return this.number;

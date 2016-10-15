@@ -31,7 +31,7 @@ public class HealthBureauFilter implements Filter {
 			
 		}
 		else{
-			resp.sendRedirect(req.getContextPath()+"/login.jsp");
+			resp.getWriter().write("<script>window.top.location.href='"+req.getContextPath()+"/login.jsp"+"';</script>");
 		}
 			
 		// TODO Auto-generated method stub

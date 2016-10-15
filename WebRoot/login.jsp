@@ -18,7 +18,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -257,10 +256,32 @@ function _change() {
 
 	//---------------------------------------------------------------------
 	//离开焦点
+	$("#verfity").keyup(function(){
+	
+		var str=$("#verfity").val();
+		if(str.length!=4){$("#information").text("验证码错误");}
+		if(str.length==4){
+		$.ajax({url:"<c:url value='/common/verificationCode.action'/>",
+			type:"POST",
+			data: {vertifyCodeText:$("#verfity").val()},
+			async:true,
+			cache:false,
+			success:function(data){
+				$("#information").text(data);
+			}
+		
+			
+		
+	
+		});	
+		}
+
+});
 	$("#verfity").blur(function(){
 	
-		
 		var str=$("#verfity").val();
+		if(str.length!=4){$("#information").text("验证码错误");}
+		if(str.length==4){
 		$.ajax({url:"<c:url value='/common/verificationCode.action'/>",
 			type:"POST",
 			data: {vertifyCodeText:$("#verfity").val()},
@@ -273,6 +294,7 @@ function _change() {
 		
 	
 		});	
+		}
 
 });
 	

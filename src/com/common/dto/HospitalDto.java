@@ -9,11 +9,6 @@ import com.common.domain.Order;
 public class HospitalDto {
 	private String id;
 	private HealthBureauDto healthBureauDto;
-	private String name;
-	private String address;
-	private String phone;
-	private String grade;
-	private Set<Order> orders = new HashSet<Order>(0);
 	public String getId() {
 		return id;
 	}
@@ -56,5 +51,10 @@ public class HospitalDto {
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
 	}
+	private String name;
+	private String address;
+	private String phone;
+	private String grade;
+	private Set<Order> orders = new HashSet<Order>(0);
 
 }

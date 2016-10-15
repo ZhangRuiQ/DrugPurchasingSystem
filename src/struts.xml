@@ -38,15 +38,15 @@
 		
 		<!-- 更新药品数据 -->
 		 <action name="updateMedicine" class="com.demo.action.healthBureau.HealthBureauAction" method="updateMedicine">
-			<result name="forward" type="redirect">medicine_maintain.action</result>
+			<result name="forward" type="redirectAction">medicine_maintain.action</result>
 		 </action> 
 		 <!-- 更新采购单单数据 -->
 		 <action name="updateOrder" class="com.demo.action.healthBureau.HealthBureauAction" method="updateOrder">
-			<result name="forward" type="redirect">purchase_maintain.action</result>
+			<result name="forward" type="redirectAction">purchase_maintain.action</result>
 		 </action> 
 		 <!-- 更新为退货单的订单 -->
 		 <action name="updateOrder_back" class="com.demo.action.healthBureau.HealthBureauAction" method="updateOrder_back">
-			<result name="forward" type="redirect">back_maintain.action</result>
+			<result name="forward" type="redirectAction">back_maintain.action</result>
 		 </action> 
 		 <!-- 只更新采购单状态status这个属性的action -->
 		 <action name="updateOrder_status" class="com.demo.action.healthBureau.HealthBureauAction" method="updateOrder_status">
@@ -58,11 +58,11 @@
 		 </action>
 		 <!-- 通过Number删除药品 -->
 		 <action name="deleteMedicineByNumber" class="com.demo.action.healthBureau.HealthBureauAction" method="deleteMedicineByNumber">
-			<result name="forward" type="redirect">medicine_maintain.action</result>
+			<result name="forward" type="redirectAction">medicine_maintain.action</result>
 		</action> 
 		<!-- 通过Id删除采购单 -->
 		<action name="deleteOrderById" class="com.demo.action.healthBureau.HealthBureauAction" method="deleteOrderById">
-			<result name="forward" type="redirect">purchase_maintain.action</result>
+			<result name="forward" type="redirectAction">purchase_maintain.action</result>
 		</action> 
 		<!-- 导出药品 -->
 		<action name="exportExcel" class="com.demo.action.healthBureau.HealthBureauAction" method="exportExcel">
@@ -70,28 +70,68 @@
 		</action> 
 		<!-- 导入药品 -->
 		<action name="importExcel" class="com.demo.action.healthBureau.HealthBureauAction" method="importExcel">
-			<result name="forward" type="redirect">medicine_maintain.action</result>
+			<result name="forward" type="redirectAction">medicine_maintain.action</result>
 		</action>
 		<!-- 插入单个药品 -->
 		<action name="insertMedicine" class="com.demo.action.healthBureau.HealthBureauAction" method="insertMedicine">
-			<result name="forward" type="redirect">medicine_maintain.action</result>
+			<result name="forward" type="redirectAction">medicine_maintain.action</result>
 		</action> 
 	</package>
 
 	<!-- 医疗机构 -->
-	<package name="hosptial" namespace="/hospital" extends="default">
-		<!-- 不跳转页面 -->
-		<action name="null_*" class="com.demo.action.hospital.HospitalAction"
-			method="{1}"></action>
-		<!-- 页面跳转 -->
-		<action name="jump_*" class="com.demo.action.hospital.HospitalAction"
-			method="{1}">
-			<result name="forword">
-				/hospital/{1}.jsp
-			</result>
+	<package name="hosptial" namespace="/hospital" extends="default"> 
+<!--  下载文件-->
+<action name="download_*" class="com.demo.action.hospital.HospitalAction"
+	method="{1}">
+	<result name="success" type="stream">
+		<!--指定文件下载类型 application/octet-stream默认值可以下载所有类型 -->
+		<param name="contentType">
+			${downloadInformation.contentType}
+		</param>
+		<!-- 指定下载的文件名和显示方式 ，但注意中文名的乱码问题，解决办法是：进行编码处理 -->
+		<!--contentDisposition是文件下载的处理方式，包括内联(inline)和附件(attachment)， 默认是inline, 
+			使用附件时这样配置：attachment;filename="文件名" 。 -->
+		<param name="contentDisposition">
+			attachment;filename="${downloadInformation.fileName}"
+		</param>
+		<!--由getDownloadFile()方法获得inputStream -->
+		<param name="inputName">downloadInformation.inputStream</param>
+		<!--指定下载文件的缓存大小 -->
+		<param name="bufferSize">2048</param>
+	</result>
+</action>
 
-		</action>
-	</package>
+
+
+
+<!-- 页面输入 （配合不跳转页面）-->
+<action name="input_*" class="com.demo.action.hospital.HospitalAction" method="input_{1}">
+<result name="inputJsp">
+/hospital/{1}.jsp
+
+</result>
+
+</action>
+
+		<!-- 不跳转页面 -->
+    <action name="null_*" class="com.demo.action.hospital.HospitalAction" method="{1}">
+<interceptor-ref name="defaultStack">  
+
+<param name="exception.logEnabled">true</param>  
+
+<param name="exception.logLevel">error</param>  
+
+</interceptor-ref>
+   
+    </action>
+    <!-- 页面跳转 -->
+    <action name="jump_*" class="com.demo.action.hospital.HospitalAction" method="{1}">
+    <result name="forword">
+    /hospital/{1}.jsp
+    </result>
+    
+    </action>
+    </package>
 
 	<!-- 公有 -->
 	<package name="common" namespace="/common" extends="default">
