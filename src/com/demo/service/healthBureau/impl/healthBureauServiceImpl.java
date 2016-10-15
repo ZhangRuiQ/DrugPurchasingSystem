@@ -44,7 +44,7 @@ public class healthBureauServiceImpl implements healthBureauService{
 	 * 插入药品
 	 * @param medicine
 	 */
-	public void insertMedicine(MedicineDto medicineDto){
+	public void txinsertMedicine(MedicineDto medicineDto){
 		Medicine medicine = new Medicine();
 		
 		medicine.setManufacturer(medicineDto.getManufacturer());
@@ -56,6 +56,7 @@ public class healthBureauServiceImpl implements healthBureauService{
 		medicine.setType(medicineDto.getType());
 		
 		healthBureauDao.insertMedicine(medicine);
+		System.out.println("insert services");
 	}
 	
 	/**

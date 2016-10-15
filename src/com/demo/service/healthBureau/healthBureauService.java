@@ -15,7 +15,7 @@ public interface healthBureauService {
 	public PageBean searchMedicines(MedicineDto medicineDto,int pageSize,int count);
 	public void updateMedicine(MedicineDto medicineDto);
 	public void deleteMedicineByNumber(MedicineDto medicineDto);
-	public void insertMedicine(MedicineDto medicineDto);
+	public void txinsertMedicine(MedicineDto medicineDto);
 	public int getMedicineCount();
 	public PageBean searchOrders(OrderDto orderDto, int pageSize, int page, int code);
 	public void txupdateOrder(OrderDto orderDto);

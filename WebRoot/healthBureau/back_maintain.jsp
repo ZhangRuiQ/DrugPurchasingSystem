@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td>
                  <div class="" id="div_id">
                     <label class="control-label" for="id">采购单编号 :</label>
-                    <input  type="text" name="orderDto.id" id="id" value="" onblur="input_check(0)" placeholder="ps：无需手动输入" disabled>
+                    <input  type="text" name="orderDto.id" id="id" value="" onblur="input_check(0)" placeholder="ps：无需手动输入" readonly="readonly" >
                  </div>
                 </td>
                 <td>

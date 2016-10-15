@@ -28,7 +28,7 @@ public class healthBureauServiceImplTest extends BaseJunit4Test{
 		medicine.setManufacturer(manufacturer);
 		medicine.setStock_Balance("70");
 		medicine.setType("类型4");
-		serviceImpl.insertMedicine(medicine);
+		serviceImpl.txinsertMedicine(medicine);
 	}
 	
 	@Test

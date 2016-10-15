@@ -70,7 +70,7 @@ public class HealthBureauAction extends ActionSupport implements SessionAware,Re
 	public String insertMedicine(){
 		System.out.println(medicineDto);
 		
-		healthBureauService.insertMedicine(medicineDto);
+		healthBureauService.txinsertMedicine(medicineDto);
 		
 		return "forward";
 	}
@@ -222,7 +222,7 @@ public class HealthBureauAction extends ActionSupport implements SessionAware,Re
 		                        	medicine_Dto.setPrice(price);
 		                        	medicine_Dto.setStatus(status);
 		                        	medicine_Dto.setManufacturer(manufacturer);
-		                        	healthBureauService.insertMedicine(medicine_Dto);
+		                        	healthBureauService.txinsertMedicine(medicine_Dto);
 		                        	k++;
 		                        
 		                        }

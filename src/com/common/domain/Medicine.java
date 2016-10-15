@@ -2,6 +2,7 @@ package com.common.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * Medicine entity. @author MyEclipse Persistence Tools
@@ -67,6 +70,8 @@ public class Medicine implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "number", unique = true, nullable = false, length = 45)
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid")
 	public String getNumber() {
 		return this.number;
 	}
