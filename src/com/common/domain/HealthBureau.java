@@ -53,7 +53,6 @@ public class HealthBureau implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false, length = 45)
 	public String getId() {
 		return this.id;

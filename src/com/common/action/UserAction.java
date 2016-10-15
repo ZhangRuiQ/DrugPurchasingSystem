@@ -34,20 +34,21 @@ public class UserAction extends ActionSupport implements SessionAware,RequestAwa
 	
 	//验证验证码
 	public String verificationCode() throws IOException{
-		
+		 ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+			
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
 		if(((String)session.get("text")).equalsIgnoreCase(vertifyCodeText))
 		{
-			
+			out.write(" ");
 		}
 		else{
-			ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
-			PrintWriter out = ServletActionContext.getResponse().getWriter();
+			
 			
 			out.write("验证码错误");
-			out.flush();
-			out.close();
+		
 			}
-	
+		out.flush();
+		out.close();
 		
 		return null;
 		
@@ -70,6 +71,7 @@ public class UserAction extends ActionSupport implements SessionAware,RequestAwa
 		{
 			Hospital h=userService.loginAtHospital(userdto);
 			if(h!=null){
+				
 				
 				HospitalDto dest=new HospitalDto();
 				HealthBureauDto d=new HealthBureauDto();

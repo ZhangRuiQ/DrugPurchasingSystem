@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </a>
                                 <ul class="dropdown-menu">
                                       <li>
-                                        <a tabindex="-1" target="iframe1" href="<c:url value='/hospital/modify_passwd.jsp'/>" class="inner_navigation">修改密码</a>
+                                        <a tabindex="-1" target="iframe1" href="<c:url value='/hospital/input_modify_passwd.action'/>" class="inner_navigation">修改密码</a>
                                     </li>
 
                                     <li>
@@ -113,20 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             
                               <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_purchase_new.action'/>" target="iframe1">采购单创建</a></div>
                               <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_purchase_search.action'/>" target="iframe1">采购单列表</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_purchase_maintain.action'/>" target="iframe1">采购单修改</a></div>
                               <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_purchase_put.action'/>" target="iframe1">采购入库</a></div>
-                            </div>
-                          </div>
-                          <div class="accordion-group">
-                            <div class="accordion-heading">
-                              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-                                 退货单管理
-                              </a>
-                            </div>
-                            <div id="collapseThree" class="accordion-body collapse">
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_back_new.action'/>" target="iframe1">退货单创建</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/hospital/jump_back_search.action'/>" target="iframe1">退货单列表</a></div>
-                        
                             </div>
                           </div>
                           <div class="accordion-group">
@@ -161,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                         </div>
                     </div>
-                     <iframe  name="iframe1" id="frame1" style="zoom: 0.8;" height="840" src="<c:url value='/hospital/index_public.jsp'/>" frameBorder="0" width="100%"></iframe> 
+                     <iframe  name="iframe1"  id="frame1" style="zoom: 0.8;" height="840" src="<c:url value='/hospital/index_public.jsp'/>" frameBorder="0" width="100%"></iframe> 
                 </div>
             </div>
             <hr>
@@ -170,7 +157,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </footer>
         </div>
    
+   
+     <!-- 模态框-->
+       <!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove-sign"></i></button>
+    <h3 id="myModalLabel"></h3>
+  </div>
+  <div class="modal-body">
+    <iframe  name="Modeliframe" id="Modeliframe" style="zoom: 0.8;" height="100%" src="" frameBorder="0" width="100%"></iframe> 
+  </div>
+</div>
+   
+   
+   
+   
   </body>
+  <script type="text/javascript">
+  
+  //模态框操作
+  function closeModel(){
+  $("#myModal").modal("hide");
+  
+  }
+  function openModel(){
+  $("#myModal").modal("show",{
+		
+			 keyboard: true,
+			 backdrop: true
+		}).css({
+                        width: "70%",
+                        height:"80%",
+                        "margin-left": function () {
+                            return -($(this).width() / 2);
+                        }
+                    });
+  
+  
+  }
+  </script>
   <script src="<c:url value='/bootstrap/vendors/jquery-1.9.1.min.js'/>"></script>
         <script src="<c:url value='/bootstrap/bootstrap/js/bootstrap.min.js'/>"></script>
         <script src="<c:url value='/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.js'/>"></script>
