@@ -26,18 +26,16 @@ public class HospitalFiler implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req=(HttpServletRequest) request;
 		HttpServletResponse resp=(HttpServletResponse)response;
+//		System.out.println("经过hospital拦截器-----------------------"+req.getRequestURL().toString());
 		if(req.getSession().getAttribute("hospital")!=null)
 		{
-			chain.doFilter(req, resp);
-			
-			
+			chain.doFilter(req, resp);	
 		}
 		else{
-			resp.sendRedirect(req.getContextPath()+"/login.jsp");
+			resp.getWriter().write("<script>window.top.location.href='"+req.getContextPath()+"/login.jsp"+"';</script>"); 
+//			resp.sendRedirect(req.getContextPath()+"/login.jsp");
 		}
 			
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
