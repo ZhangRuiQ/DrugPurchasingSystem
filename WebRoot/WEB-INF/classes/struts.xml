@@ -5,86 +5,141 @@
 
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.devMode" value="true" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
 	<constant name="struts.i18n.encoding" value="UTF-8" />
-    <package name="default" namespace="/" extends="struts-default">
+	<package name="default" namespace="/" extends="struts-default">
 
-        <default-action-ref name="index" />
+		<default-action-ref name="index" />
 
-        <global-results>
-            <result name="error">/error.jsp</result>
-        </global-results>
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
 
-        <global-exception-mappings>
-            <exception-mapping exception="java.lang.Exception" result="error"/>
-        </global-exception-mappings>
-    </package>
-    
-    
-    <!-- 监管机构 -->
-    <package name="healthBureau" namespace="/healthBureau" extends="default"> 
-    
-    
-    </package>
-    
-    <!-- 医疗机构 -->
-<package name="hosptial" namespace="/hospital" extends="default"> 
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+	</package>
+
+
+	<!-- 监管机构 -->
+	<package name="healthBureau" namespace="/healthBureau" extends="default">
 		<!-- 不跳转页面 -->
-    <action name="null_*" class="com.demo.action.hospital.HospitalAction" method="{1}"></action>
-    <!-- 页面跳转 -->
-    <action name="jump_*" class="com.demo.action.hospital.HospitalAction" method="{1}">
-    <result name="forword">
-    /hospital/{1}.jsp
-    </result>
-    
-    </action>
-    </package>
-    
-    <!-- 公有 -->
-  <package name="common" namespace="/common" extends="default">
-  
-  		<!-- 验证码图片生成-->
-	<action name="vertifyImage" class="com.common.action.UserAction"
-		method="getImage">
-		<result name="success" type="stream">
-			<param name="contentType">image/jpeg</param>
-			<param name="inputName">imageStream</param>
-			<param name="bufferSize">1024</param>
-		</result>
-	</action>
+		<!-- <action name="null_*" class="com.demo.action.healthBureau.HealthBureauAction"
+			method="{1}"></action> -->
+		<!-- 页面跳转 -->
+		<action name="*" class="com.demo.action.healthBureau.HealthBureauAction"
+			method="{1}">
+			<result name="forward">
+				/healthBureau/{1}.jsp
+			</result>
+		</action>
+		
+		<!-- 更新药品数据 -->
+		 <action name="updateMedicine" class="com.demo.action.healthBureau.HealthBureauAction" method="updateMedicine">
+			<result name="forward" type="redirect">medicine_maintain.action</result>
+		 </action> 
+		 <!-- 更新采购单单数据 -->
+		 <action name="updateOrder" class="com.demo.action.healthBureau.HealthBureauAction" method="updateOrder">
+			<result name="forward" type="redirect">purchase_maintain.action</result>
+		 </action> 
+		 <!-- 更新为退货单的订单 -->
+		 <action name="updateOrder_back" class="com.demo.action.healthBureau.HealthBureauAction" method="updateOrder_back">
+			<result name="forward" type="redirect">back_maintain.action</result>
+		 </action> 
+		 <!-- 只更新采购单状态status这个属性的action -->
+		 <action name="updateOrder_status" class="com.demo.action.healthBureau.HealthBureauAction" method="updateOrder_status">
+			<result name="forward" type="redirect"></result>
+		 </action> 
+		 <!-- 查询采购单的订单项 -->
+		 <action name="searchOrderItems" class="com.demo.action.healthBureau.HealthBureauAction" method="searchOrderItems">
+			<result name="forward" type="redirect">searchOrderItems.jsp</result>
+		 </action>
+		 <!-- 通过Number删除药品 -->
+		 <action name="deleteMedicineByNumber" class="com.demo.action.healthBureau.HealthBureauAction" method="deleteMedicineByNumber">
+			<result name="forward" type="redirect">medicine_maintain.action</result>
+		</action> 
+		<!-- 通过Id删除采购单 -->
+		<action name="deleteOrderById" class="com.demo.action.healthBureau.HealthBureauAction" method="deleteOrderById">
+			<result name="forward" type="redirect">purchase_maintain.action</result>
+		</action> 
+		<!-- 导出药品 -->
+		<action name="exportExcel" class="com.demo.action.healthBureau.HealthBureauAction" method="exportExcel">
+			<result name="success" ></result>
+		</action> 
+		<!-- 导入药品 -->
+		<action name="importExcel" class="com.demo.action.healthBureau.HealthBureauAction" method="importExcel">
+			<result name="forward" type="redirect">medicine_maintain.action</result>
+		</action>
+		<!-- 插入单个药品 -->
+		<action name="insertMedicine" class="com.demo.action.healthBureau.HealthBureauAction" method="insertMedicine">
+			<result name="forward" type="redirect">medicine_maintain.action</result>
+		</action> 
+	</package>
+
+	<!-- 医疗机构 -->
+	<package name="hosptial" namespace="/hospital" extends="default">
+		<!-- 不跳转页面 -->
+		<action name="null_*" class="com.demo.action.hospital.HospitalAction"
+			method="{1}"></action>
+		<!-- 页面跳转 -->
+		<action name="jump_*" class="com.demo.action.hospital.HospitalAction"
+			method="{1}">
+			<result name="forword">
+				/hospital/{1}.jsp
+			</result>
+
+		</action>
+	</package>
+
+	<!-- 公有 -->
+	<package name="common" namespace="/common" extends="default">
+
+		<!-- 验证码图片生成 -->
+		<action name="vertifyImage" class="com.common.action.UserAction"
+			method="getImage">
+			<result name="success" type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
 
 
-		<!-- 判断验证码是否正确-->
-	<action name="verificationCode" class="com.common.action.UserAction" method="verificationCode">
-		
-	</action>
-	<!-- 登录 -->
-	<action name="login" class="com.common.action.UserAction" method="login">
-		<result name="success1" type="redirect">
-		/hospital/index.jsp
-		
-		</result>
-		
-		<result name="success2" type="redirect">
-		/healthBureau/index.jsp
-		
-		</result>
-		<result name="fail" type="redirect">
-		/login.jsp
-		</result>
-		
-	
-	</action>
-<!-- 注销 -->
-<action name="logout" class="com.common.action.UserAction" method="logout" >
-<result name="success" type="redirect">
-/login.jsp
-</result>
-</action>
-<!-- 建议反馈 -->
-</package>
+		<!-- 判断验证码是否正确 -->
+		<action name="verificationCode" class="com.common.action.UserAction"
+			method="verificationCode">
 
-    <!-- Add packages here -->
+		</action>
+		<!-- 登录 -->
+		<action name="login" class="com.common.action.UserAction"
+			method="login">
+			<result name="success1" type="redirect">
+				/hospital/index.jsp
+
+			</result>
+
+			<result name="success2" type="redirect">
+				/healthBureau/index.jsp
+
+			</result>
+			<result name="fail" type="redirect">
+				/login.jsp
+			</result>
+
+
+		</action>
+		<!-- 注销 -->
+		<action name="logout" class="com.common.action.UserAction"
+			method="logout">
+			<result name="success" type="redirect">
+				/login.jsp
+			</result>
+		</action>
+		<!-- 建议反馈 -->
+	</package>
+
+	<!-- Add packages here -->
 
 </struts>

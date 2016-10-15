@@ -62,7 +62,7 @@ public class OrderItem implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "order", nullable = false)
+	@JoinColumn(name = "\"order\"", nullable = false)
 	public Order getOrder() {
 		return this.order;
 	}

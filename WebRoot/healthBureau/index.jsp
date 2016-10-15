@@ -12,11 +12,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <head>
         <title>药品集中采购系统</title>
         <meta charset="UTF-8">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
         <!-- Bootstrap -->
         <link href="<c:url value='/bootstrap/bootstrap/css/bootstrap.min.css'/>" rel="stylesheet" media="screen">
         <link href="<c:url value='/bootstrap/bootstrap/css/bootstrap-responsive.min.css'/>" rel="stylesheet" media="screen">
         <link href="<c:url value='/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.css'/>" rel="stylesheet" media="screen">
         <link href="<c:url value='/bootstrap/assets/styles.css'/>" rel="stylesheet" media="screen">
+        <link href="<c:url value='/bootstrap/vendors/jGrowl/jquery.jgrowl.css'/>" rel="stylesheet" media="screen">
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="index.jsp">药品集中采购系统</a>
+                    <a class="brand" href="<c:url value='/healthBureau/index.jsp' />">药品集中采购系统</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
@@ -48,13 +50,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <li>
                                         <a tabindex="-1" href="<c:url value='/common/logout.action'/>">注销</a>
                                     </li>
-                                    
-
                                 </ul>
                             </li>
                         </ul>
                         <ul class="nav">
-                            <li id="<c:url value='/healthBureau/index.jsp' />"  class=" active navigation ">
+                            <li id="index.jsp"  class=" active navigation ">
                                 <a href="<c:url value='/healthBureau/index.jsp' />" class="navigation_event">主页</a>
                         
                             </li>
@@ -130,47 +130,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="span2" id="sidebar">
                      <div class="accordion" id="accordion2">
                           <div class="accordion-group">
-                            <div class="accordion-heading">
-                              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                            <div class="accordion-heading">					<!-- data-parent="#accordion2"指定父元素下的所有可折叠的元素将被关闭 -->
+                              <a class="accordion-toggle" data-toggle="collapse" data-parent="" href="#collapseOne">
                                  药品目录
                               </a>
                             </div>
                             <div id="collapseOne" class="accordion-body collapse in">
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/medicine_search.jsp' />" target="iframe1">药品目录查询</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a  class="inner_navigation" href="<c:url value='/healthBureau/medicine_maintain.jsp' />" target="iframe1">药品目录维护</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/medicine_search.action?page=1' />" target="iframe1">药品目录查询</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a  class="inner_navigation" href="<c:url value='/healthBureau/medicine_maintain.action?page=1' />" target="iframe1">药品目录维护</a></div>
                              <%--  <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/medicine_control.jsp' />" target="iframe1">供货目录控制</a></div> --%>
                             </div>
                           </div>
                           <div class="accordion-group">
                             <div class="accordion-heading">
-                              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                              <a class="accordion-toggle" data-toggle="collapse" data-parent="" href="#collapseTwo">
                                  采购单管理
                               </a>
                             </div>
                             <div id="collapseTwo" class="accordion-body collapse">
                               <%-- <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/purchase_new.jsp' />" target="iframe1">采购单创建</a></div> --%>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/purchase_search.jsp' />" target="iframe1">采购单查询</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/purchase_maintain.jsp' />" target="iframe1">采购单维护</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/purchase_ratify.jsp' />" target="iframe1">采购单审批</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/purchase_put.jsp' />" target="iframe1">采购入库</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/purchase_search.action?page=1' />" target="iframe1">采购单查询</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/purchase_maintain.action?page=1' />" target="iframe1">采购单维护</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/purchase_ratify.action?page=1' />" target="iframe1">采购单审批</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/purchase_put.action?page=1' />" target="iframe1">采购入库</a></div>
                             </div>
                           </div>
                           <div class="accordion-group">
                             <div class="accordion-heading">
-                              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                              <a class="accordion-toggle" data-toggle="collapse" data-parent="" href="#collapseThree">
                                  退货单管理
                               </a>
                             </div>
                             <div id="collapseThree" class="accordion-body collapse">
                               <%-- <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/back_new.jsp' />" target="iframe1">退货单创建</a></div> --%>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/back_search.jsp' />" target="iframe1">退货单查询</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/back_maintain.jsp' />" target="iframe1">退货单维护</a></div>
-                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/back_ratify.jsp' />" target="iframe1">退货单审批</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/back_search.action?page=1' />" target="iframe1">退货单查询</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/back_maintain.action?page=1' />" target="iframe1">退货单维护</a></div>
+                              <div class="accordion-inner"><i class="icon-star"></i> <a class="inner_navigation" href="<c:url value='/healthBureau/back_ratify.action?page=1' />" target="iframe1">退货单审批</a></div>
                             </div>
                           </div>
                           <div class="accordion-group">
                             <div class="accordion-heading">
-                              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+                              <a class="accordion-toggle" data-toggle="collapse" data-parent="" href="#collapseFour">
                                  统计分析
                               </a>
                             </div>
@@ -216,11 +216,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <script src="<c:url value='/bootstrap/bootstrap/js/bootstrap.min.js'/>"></script>
         <script src="<c:url value='/bootstrap/vendors/easypiechart/jquery.easy-pie-chart.js'/>"></script>
         <script src="<c:url value='/bootstrap/assets/scripts.js'/>"></script>
+        <script src="<c:url value='/bootstrap/vendors/jGrowl/jquery.jgrowl.js'/>"></script>
         <script>
         $(function() {
   
             // Easy pie charts
-            $("#frame1").attr("src","<c:url value='/healthBureau/medicine_search.jsp'/>");
+            $("#frame1").attr("src","<c:url value='/healthBureau/index_public.jsp'/>");
             $('.chart').easyPieChart({animate: 1000});
         });
 		
@@ -276,10 +277,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$("#catalogue").text(Str_text);
 		
 	});
+	
+	//加载首页时显示欢迎提示
+	window.onload = function() {
+		$.jGrowl("欢迎使用本系统!");
+	}
 
 
-
-        </script>
+ 	</script>
     </body>
 
 </html>

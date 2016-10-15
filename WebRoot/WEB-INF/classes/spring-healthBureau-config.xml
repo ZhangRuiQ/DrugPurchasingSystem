@@ -10,4 +10,22 @@
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 		
-		</beans>
+		
+		<bean id="HealthBureauAction" class="com.demo.action.healthBureau.HealthBureauAction">
+		<property name="healthBureauService">
+		 		<ref bean="healthBureauService" />
+		 	</property>
+		 </bean>
+		
+		<bean id="HealthBureauDaoImpl" class="com.demo.dao.healthBureau.impl.HealthBureauDaoImpl"
+		  p:sessionFactory-ref="sessionFactory">
+		 </bean>
+		 
+		 <!-- 报空指针异常原因：按照bean的id注入的，写的healthBureauService他就会在配置文件中找id为healthBureauService的bean，但是找不到，就注入不成功 -->
+		 <bean id="healthBureauService" class="com.demo.service.healthBureau.impl.healthBureauServiceImpl">
+		  <property name="HealthBureauDao">
+		 		<ref bean="HealthBureauDaoImpl" />
+		 	</property>
+		 </bean>
+		
+</beans>

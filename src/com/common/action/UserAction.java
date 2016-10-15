@@ -40,7 +40,7 @@ public class UserAction extends ActionSupport implements SessionAware,RequestAwa
 			
 		}
 		else{
-			 ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+			ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
 			PrintWriter out = ServletActionContext.getResponse().getWriter();
 			
 			out.write("验证码错误");

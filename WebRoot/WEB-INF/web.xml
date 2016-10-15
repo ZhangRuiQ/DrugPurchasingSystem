@@ -26,18 +26,20 @@
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
 	
-  <filter>
-        <filter-name>struts2</filter-name>
-        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>struts2</filter-name>
-        <url-pattern>*.action</url-pattern>
-    </filter-mapping>
-    
-  
-	<filter>
+	    	<filter>
+	  <filter-name>LoginFilter </filter-name>
+  <filter-class>com.common.filter.LoginFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	<filter-name>LoginFilter</filter-name>
+	<url-pattern>/login.jsp</url-pattern>
+	</filter-mapping>
+	
+	
+	
+	
+	 <filter>
   <filter-name>hospitalFilter</filter-name>
   <filter-class>com.common.filter.HospitalFiler</filter-class>
 	</filter>
@@ -55,15 +57,32 @@
 	<filter-name>healthBureauFilter</filter-name>
 	<url-pattern>/healthBureau/*</url-pattern>
 	</filter-mapping>
-    	<filter>
-	  <filter-name>LoginFilter </filter-name>
-  <filter-class>com.common.filter.LoginFilter</filter-class>
-	</filter>
 	
-	<filter-mapping>
-	<filter-name>LoginFilter</filter-name>
-	<url-pattern>/login.jsp</url-pattern>
-	</filter-mapping>
+	
+	
+ 
+
     
+	 
+	 
+	 
+	 
+	 
+	 
+
+  <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+      <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    	
 
   </web-app>

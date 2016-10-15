@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
+    <%-- <base href="<%=basePath%>"> --%>
     
 
     
@@ -118,6 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </td>
             </tr>
         </table>
+        <s:debug></s:debug>
       <div class="navbar navbar-inner ">
             <div class="muted pull-left" >药品目录列表</div>
      </div>

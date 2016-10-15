@@ -23,25 +23,19 @@ public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest req=(HttpServletRequest) request;
-		HttpServletResponse resp=(HttpServletResponse)response;
-		if(req.getSession().getAttribute("hospital")!=null)
-		{
-			
-			resp.sendRedirect(req.getContextPath()+"/hospital/index.jsp");
-			
-			
-			
-		}
-		else if(req.getSession().getAttribute("healthBureau")!=null)
-		{
-			resp.sendRedirect(req.getContextPath()+"/healthBureau/index.jsp");
-		}
-		else{
-			
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse resp = (HttpServletResponse) response;
+		if (req.getSession().getAttribute("hospital") != null) {
+
+			resp.sendRedirect(req.getContextPath() + "/hospital/index.jsp");
+
+		} else if (req.getSession().getAttribute("healthBureau") != null) {
+			resp.sendRedirect(req.getContextPath() + "/healthBureau/index.jsp");
+		} else {
+
 			chain.doFilter(req, resp);
 		}
-		
+
 		// TODO Auto-generated method stub
 
 	}

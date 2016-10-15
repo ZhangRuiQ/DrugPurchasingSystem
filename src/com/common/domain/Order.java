@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * Order entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "order", catalog = "bcps")
+@Table(name = "\"order\"", catalog = "bcps")
 public class Order implements java.io.Serializable {
 
 	// Fields
@@ -100,7 +100,7 @@ public class Order implements java.io.Serializable {
 		this.amount = amount;
 	}
 
-	@Column(name = "status", nullable = false)
+	@Column(name = "\"status\"", nullable = false)
 	public Integer getStatus() {
 		return this.status;
 	}
