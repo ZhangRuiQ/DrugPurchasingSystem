@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--下载-->
   <div style="margin-top:1%" class="row-fluid">
     <div class="offset10">
-    <a class="btn btn-primary"><i class="icon-download  icon-white"></i>下载手册</a>
+    <a class="btn btn-primary" target="_blank" href="<c:url value='/healthBureau/downloadManual.action' />"><i class="icon-download  icon-white"></i>下载手册</a>
 </div>
 </div>
 

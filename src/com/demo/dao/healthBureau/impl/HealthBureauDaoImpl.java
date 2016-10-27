@@ -21,6 +21,9 @@ import java.util.List;
 
 
 
+
+
+
 import org.hamcrest.core.Is;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -34,6 +37,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.common.domain.HealthBureau;
 import com.common.domain.Medicine;
 import com.common.domain.Order;
 import com.common.domain.OrderItem;
@@ -44,6 +48,20 @@ public class HealthBureauDaoImpl extends HibernateDaoSupport implements healthBu
 	//无参构造器
 	public HealthBureauDaoImpl() {
 		super();
+	}
+	
+	/**
+	 * 根据id获取对象
+	 */
+	public <T> T getPasswdById(Class<T> entityClass,  String id){
+		return this.getHibernateTemplate().get(entityClass, id);
+	}
+	
+	/**
+	 * 更新对象
+	 */
+	public void updateObeject(Object obj){
+		this.getHibernateTemplate().update(obj);
 	}
 	
 	/**
@@ -76,10 +94,6 @@ public class HealthBureauDaoImpl extends HibernateDaoSupport implements healthBu
 		q.setMaxResults(length);
 		medicines = (List<Medicine>)q.list();
 		
-		for(int i=0;i<medicines.size();i++)
-		{
-			System.out.println(medicines.get(i).getName());
-		}
 		
 		return medicines;
 	}
@@ -96,7 +110,7 @@ public class HealthBureauDaoImpl extends HibernateDaoSupport implements healthBu
 	/**
 	 * 插入药品数据
 	 */
-	public void insertMedicine(Medicine medicine) {
+	public boolean insertMedicine(Medicine medicine) {
 		
 //		this.getHibernateTemplate().save(medicine);
 
@@ -114,8 +128,9 @@ public class HealthBureauDaoImpl extends HibernateDaoSupport implements healthBu
 		   
 		tx.commit();
 
-		System.out.println("插入dao成功");
+		System.out.println("dao插入药品成功");
 		
+		return true;
 	}
 	
 	
@@ -157,7 +172,7 @@ public class HealthBureauDaoImpl extends HibernateDaoSupport implements healthBu
 		
 		
 		this.getHibernateTemplate().save(medicine);
-		System.out.println("dao成功");
+		System.out.println("dao更新药品成功！");
 	}
 	
 	/**

@@ -27,5 +27,7 @@
 		 		<ref bean="HealthBureauDaoImpl" />
 		 	</property>
 		 </bean>
+		 
+		 
 		
 </beans>

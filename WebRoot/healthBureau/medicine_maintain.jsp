@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td>
                  <div class="" id="div_number">
                     <label class="control-label" for="number">流水号 :</label>
-                    <input name="medicineDto.number" type="text" id="number" onblur="input_check(4)" value="" placeholder="ps：添加药品时自动生成" disabled>
+                    <input name="medicineDto.number" type="text" id="number" onblur="input_check(4)" value="" placeholder="ps：添加药品时自动生成" readonly="readonly">
                  </div>
                 </td>
                 <td>
@@ -163,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  			 </div>
   			<div class="modal-footer">
    			 <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-   			 <button class="btn btn-primary" onclick="document.getElementById('myForm').submit();" data-dismiss="modal">确认</button>
+   			 <button class="btn btn-primary" onclick="checkInputValue()" data-dismiss="modal">确认</button>
 		  </div>
 		 </div>    
         </center>
@@ -458,25 +458,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//添加药品的点击事件
 	function insertMedicine(){
 		
-		var medicineDto = {
-				"medicineDto.name" : $('input[name="medicineDto.name"]').val(),
-				"medicineDto.type"	:	$('input[name="medicineDto.type"]').val(),
-				"medicineDto.standard"	:	$('input[name="medicineDto.standard"]').val(),
-				"medicineDto.stock_Balance"	:	$('input[name="medicineDto.stock_Balance"]').val(),
-				"medicineDto.manufacturer.number"	:	$('input[name="medicineDto.manufacturer.number"]').val(),
-				"medicineDto.price"	  :		$('input[name="medicineDto.price"]').val(),
-				"medicineDto.status"	:	12
-	        };
+		if($('input[name="medicineDto.name"]').val() == ""){
+			alert("通用名不能值为空，请输入通用名！");
+		}else if($('input[name="medicineDto.type"]').val() == ""){
+			alert("剂型不能值为空，请输入剂型！");
+		}else if($('input[name="medicineDto.standard"]').val() == ""){
+			alert("规格不能值为空，请输入规格！");
+		}else if($('input[name="medicineDto.stock_Balance"]').val() == ""){
+			alert("转换系数不能值为空，请输入转换系数！");
+		}else if($('input[name="medicineDto.manufacturer.number"]').val() == ""){
+			alert("生产企业不能值为空，请输入生产企业！");
+		}else if($('input[name="medicineDto.price"]').val() == ""){
+			alert("价格不能值为空，请输入价格！");
+		}else{
+			
+			var medicineDto = {
+					"medicineDto.name" : $('input[name="medicineDto.name"]').val(),
+					"medicineDto.type"	:	$('input[name="medicineDto.type"]').val(),
+					"medicineDto.standard"	:	$('input[name="medicineDto.standard"]').val(),
+					"medicineDto.stock_Balance"	:	$('input[name="medicineDto.stock_Balance"]').val(),
+					"medicineDto.manufacturer.number"	:	$('input[name="medicineDto.manufacturer.number"]').val(),
+					"medicineDto.price"	  :		$('input[name="medicineDto.price"]').val(),
+					"medicineDto.status"	:	12
+		        };
+			
+			$.ajax({url:"<c:url value='/healthBureau/insertMedicine.action' />",
+				type:"POST",
+				data: medicineDto,	
+				async:true,
+				cache:false,
+				success:function(data){
+					$.jGrowl(data);
+				}
+			});	
 		
-		$.ajax({url:"<c:url value='/healthBureau/insertMedicine.action' />",
-			type:"POST",
-			data: medicineDto,	
-			async:true,
-			cache:false,
-			success:function(data){	
-				$.jGrowl("添加成功!");
-			}
-		});	
+		}
+		
 
 	};
 	
@@ -569,20 +586,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//更新药品的确认点击事件
 	 function checkInputValue(){
 		
-		 var table = document.getElementById("table");	//获取"table"的这个元素
-		 
-		 var inputs = table.getElementsByTagName("input");	//获取table的下的所有input元素
-		 
-		 for (var i=0; i<inputs.length; i++){
-			if(  inputs[i].value != "" ){
+		 if($('input[name="medicineDto.name"]').val() == ""){
+				alert("通用名不能值为空，请输入通用名！");
+			}else if($('input[name="medicineDto.type"]').val() == ""){
+				alert("剂型不能值为空，请输入剂型！");
+			}else if($('input[name="medicineDto.standard"]').val() == ""){
+				alert("规格不能值为空，请输入规格！");
+			}else if($('input[name="medicineDto.stock_Balance"]').val() == ""){
+				alert("转换系数不能值为空，请输入转换系数！");
+			}else if($('input[name="medicineDto.manufacturer.number"]').val() == ""){
+				alert("生产企业不能值为空，请输入生产企业！");
+			}else if($('input[name="medicineDto.price"]').val() == ""){
+				alert("价格不能值为空，请输入价格！");
+			}else if($('input[name="medicineDto.status"]').val() == ""){
+				alert("交易状态不能值为空，请选择交易状态！");
+			}else{
 				document.getElementById("myForm").submit();  
-				break;
-			 }else{
-				 alert("内容能为空！无法修改！");
-				 break;
-			 } 
-		 }
+			}
 		 
-	}; 
+	}
 	
 </script>

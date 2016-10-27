@@ -36,10 +36,16 @@
 			</result>
 		</action>
 		
-		<!-- 更新药品数据 -->
+		 <!-- 更新药品数据 -->
 		 <action name="updateMedicine" class="com.demo.action.healthBureau.HealthBureauAction" method="updateMedicine">
 			<result name="forward" type="redirectAction">medicine_maintain.action</result>
 		 </action> 
+		 <!-- 修改用户密码 -->
+		 <action name="modify_passwd" class="com.demo.action.healthBureau.HealthBureauAction" method="modify_passwd">
+		 </action> 
+		 <!-- 下载操作手册-->
+		 <action name="downloadManual" class="com.demo.action.healthBureau.HealthBureauAction" method="downloadManual">
+		 </action>
 		 <!-- 更新采购单单数据 -->
 		 <action name="updateOrder" class="com.demo.action.healthBureau.HealthBureauAction" method="updateOrder">
 			<result name="forward" type="redirectAction">purchase_maintain.action</result>
@@ -71,6 +77,10 @@
 		<!-- 导入药品 -->
 		<action name="importExcel" class="com.demo.action.healthBureau.HealthBureauAction" method="importExcel">
 			<result name="forward" type="redirectAction">medicine_maintain.action</result>
+		</action>
+		<!-- 发送建议邮件 -->
+		<action name="sendMail" class="com.demo.action.healthBureau.HealthBureauAction" method="sendMail">
+			<result name="forward" type="redirect">root_propose.jsp</result>
 		</action>
 		<!-- 插入单个药品 -->
 		<action name="insertMedicine" class="com.demo.action.healthBureau.HealthBureauAction" method="insertMedicine">

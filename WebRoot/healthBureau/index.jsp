@@ -70,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                              
                                     <li class="divider"></li>
                                  
-                                 <li>
+                                 <%-- <li>
                                         <a href="<c:url value='/healthBureau/root_journal.jsp' />" class="navigation_event" target="iframe1"> <i class="icon-align-left"></i>日志
 
                                         </a>
@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                         </a>
                                    
-                                    </li>
+                                    </li> --%>
 
                                 </ul>
                             </li>
@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a tabindex="-1" href="<c:url value='/healthBureau/information.jsp' />" class="navigation_event" target="iframe1">信息</a>
+                                        <a tabindex="-1" href="<c:url value='/healthBureau/information.jsp' />" class="navigation_event" target="iframe1">账户信息</a>
                                     </li>  
                                     <li class="divider"></li>
                                     <li>
@@ -105,9 +105,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>
+                                    <%-- <li>
                                         <a tabindex="-1" href="<c:url value='/healthBureau/user_list.jsp' />" class="navigation_event" target="iframe1">用户列表</a>
-                                    </li>
+                                    </li> --%>
         
                                     <li>
                                         <a tabindex="-1" href="<c:url value='/healthBureau/user_power.jsp' />" class="navigation_event" target="iframe1">权限</a>

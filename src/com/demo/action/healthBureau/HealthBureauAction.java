@@ -1,17 +1,20 @@
 package com.demo.action.healthBureau;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.lang.reflect.Method;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -26,6 +29,12 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 import com.common.domain.Manufacturer;
 import com.common.domain.Medicine;
@@ -55,11 +64,90 @@ public class HealthBureauAction extends ActionSupport implements SessionAware,Re
 	private String message; //用来判定是那个页面提交的
 	private PageBean orderItems;
 	private OrderItemDto orderItemDto;
+	private String oldPasswd;
+	private String newPasswd;
+	private String againPasswd;
+	private String subject;
+	private String text;
 	
-
+	
+	//修改用户密码
+	public String modify_passwd() throws IOException{
+		String result = "";
+		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+		healthBureauDto = (HealthBureauDto) ServletActionContext.getRequest().getSession().getAttribute("healthBureau");
+		String id = healthBureauDto.getId();
+		
+		boolean ret = healthBureauService.txmodify_passwd(id, oldPasswd, newPasswd);
+		
+		PrintWriter writer = ServletActionContext.getResponse().getWriter();
+		if (newPasswd.equals(againPasswd)) {
+			if (ret) {
+				result = "修改密码成功!";
+			}else {
+				result = "抱歉，旧密码输入错误!请重新再试";
+			}
+		}else {
+			result = "抱歉，修改密码失败!请重新再试";
+		}
+		
+		writer.write(result);
+		writer.flush();
+		writer.close();
+		
+		return null;
+	}
+	
+	//发送建议邮件
+	public String sendMail() throws UnsupportedEncodingException {	
+		//由于jsp默认编码为ISO-8859-1，所以.getBytes("ISO8859-1");来得到正确的在ISO8859-1中的编码值,再通过new String()来更换UTF-8的编码字符集
+		String subject = new String(ServletActionContext.getRequest().getParameter("subject").getBytes("ISO-8859-1"),"UTF-8");
+		String text = new String(ServletActionContext.getRequest().getParameter("text").getBytes("ISO-8859-1"),"UTF-8");
+		ApplicationContext actx = new ClassPathXmlApplicationContext(
+				"spring-config.xml");
+		JavaMailSender sender = (JavaMailSender) actx.getBean("mailSender");
+		SimpleMailMessage mailMessage = (SimpleMailMessage) actx.getBean("mailMessage");
+		
+		mailMessage.setSubject(subject);
+		mailMessage.setText(text);
+		mailMessage.setTo("2538448734@qq.com");
+		sender.send(mailMessage);
+		
+		return "forward";
+	}
+	
+	//下载操作手册
+	public void downloadManual() throws IOException {
+		HttpServletResponse response = null;//创建一个HttpServletResponse对象
+        OutputStream out = null;//创建一个输出流对象
+        String filePath = ServletActionContext.getServletContext().getRealPath("healthBureau/downloadFiles/企业操作手册.doc");
+        System.out.println(filePath);
+        
+        response = ServletActionContext.getResponse();//初始化HttpServletResponse对象
+        out = response.getOutputStream();
+      
+        String headerStr =new String("企业操作手册.doc");
+        headerStr = new String(headerStr.getBytes("gb2312"), "ISO8859-1");//headerString为中文时转码
+        response.setHeader("Content-disposition","attachment; filename="+ headerStr);//filename是下载的xls的名，建议最好用英文
+        response.setContentType("application/msword;charset=UTF-8");//设置类型
+        
+        int len = 0;
+        byte[] buffer = new byte[2048];
+        
+        InputStream in = new FileInputStream(filePath);
+        while ((len = in.read(buffer)) > 0) {
+        	out.write(buffer,0,len);
+        }
+        
+        in.close();
+        out.flush();
+    	out.close();
+    	
+	}
+	 
+	
 	//药品目录查询(分页查询)
 	public String medicine_search(){
-		System.out.println(medicineDto);
 		
 		this.pageBean = healthBureauService.searchMedicines(medicineDto, 8, page);
 		application.put("pageBean", pageBean);
@@ -67,17 +155,30 @@ public class HealthBureauAction extends ActionSupport implements SessionAware,Re
 		return "forward";
 	}
 	
-	public String insertMedicine(){
-		System.out.println(medicineDto);
+	public String insertMedicine() throws IOException{
+		String insertInformation = "";
 		
-		healthBureauService.txinsertMedicine(medicineDto);
+		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+		PrintWriter writer = ServletActionContext.getResponse().getWriter();
+				
+		
+		boolean ret = healthBureauService.txinsertMedicine(medicineDto);
+	
+		if (!ret) {
+			insertInformation = "添加失败，请重新再试！";
+		}else {
+			insertInformation = "添加成功！";
+		}
+		
+		writer.print(insertInformation);
+		writer.flush();
+		writer.close();  
 		
 		return "forward";
 	}
 	
 	//每个药品点击修改后所需的查询
 	public void medicine_search_maintain() throws IOException{
-		System.out.println(medicineDto);
 		
 		Medicine medicine = healthBureauService.searchSingleMedicineByNumber(medicineDto.getNumber());
 			
@@ -108,7 +209,6 @@ public class HealthBureauAction extends ActionSupport implements SessionAware,Re
 	
 	//删除单个药品
 	public String deleteMedicineByNumber(){
-		System.out.println(medicineDto);
 		
 		healthBureauService.deleteMedicineByNumber(medicineDto);
 		
@@ -120,8 +220,6 @@ public class HealthBureauAction extends ActionSupport implements SessionAware,Re
 	public String medicine_maintain(){
 		
 		medicine_search();
-		
-		System.out.println(medicineDto);
 		
 		return "forward";
 	}
@@ -375,7 +473,6 @@ public class HealthBureauAction extends ActionSupport implements SessionAware,Re
 		
 	//采购单列表查询
 	public String purchase_search(){
-		System.out.println(orderDto);
 		
 		this.pageBean = healthBureauService.searchOrders(orderDto, 5, page, 100);
 		session.put("pageBean", pageBean);
@@ -397,7 +494,6 @@ public class HealthBureauAction extends ActionSupport implements SessionAware,Re
 	
 	//查询采购单的订单项
 	public String searchOrderItems(){
-		System.out.println(orderItemDto);
 		session.remove("orderItems");
 		
 		Order order = new Order();
@@ -415,7 +511,6 @@ public class HealthBureauAction extends ActionSupport implements SessionAware,Re
 	
 	//每个订单被点击修改后所需要做的单个查询
 		public void order_search_maintain() throws IOException{
-			System.out.println(orderDto);
 			
 			Order order = healthBureauService.searchSingleOrderById(orderDto.getId());
 			
@@ -623,5 +718,58 @@ public class HealthBureauAction extends ActionSupport implements SessionAware,Re
 	public void setOrderItemDto(OrderItemDto orderItemDto) {
 		this.orderItemDto = orderItemDto;
 	}
+
+	public Map<String, Object> getRequest() {
+		return request;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public Map<String, Object> getApplication() {
+		return application;
+	}
+
+	public String getOldPasswd() {
+		return oldPasswd;
+	}
+
+	public void setOldPasswd(String oldPasswd) {
+		this.oldPasswd = oldPasswd;
+	}
+
+	public String getNewPasswd() {
+		return newPasswd;
+	}
+
+	public void setNewPasswd(String newPasswd) {
+		this.newPasswd = newPasswd;
+	}
+
+	public String getAgainPasswd() {
+		return againPasswd;
+	}
+
+	public void setAgainPasswd(String againPasswd) {
+		this.againPasswd = againPasswd;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+	
 	
 }

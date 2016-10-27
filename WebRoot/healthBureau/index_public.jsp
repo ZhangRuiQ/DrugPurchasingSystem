@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <br>
   <h1><small>Hello, 如果有什么意见，请麻烦您填写意见........</small></h1>
 
-  <p><a class="btn btn-primary btn-lg" href="<c:url value='/hospital/root_propose.jsp'/>" role="button">意见反馈</a></p>
+  <p><a class="btn btn-primary btn-lg" href="<c:url value='healthBureau/root_propose.jsp'/>" role="button">意见反馈</a></p>
 </div>
 
 

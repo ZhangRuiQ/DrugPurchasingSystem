@@ -1,15 +1,13 @@
 package com.demo.service.healthBureau.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.beanutils.BeanUtils;
 
+import com.common.domain.HealthBureau;
 import com.common.domain.Hospital;
 import com.common.domain.Manufacturer;
 import com.common.domain.Medicine;
@@ -29,6 +27,32 @@ public class healthBureauServiceImpl implements healthBureauService{
 	public healthBureauServiceImpl() {
 		super();
 	}
+	
+	/**
+	 * 修改用户密码
+	 */
+	public boolean txmodify_passwd(String id, String oldPasswd, String newPasswd){
+		boolean ret = false;
+		HealthBureau healthBureau = (HealthBureau) this.getObejectById(id);
+		
+		if (oldPasswd.equals(healthBureau.getPasswd())) {
+			healthBureau.setPasswd(newPasswd);  				//设置新的密码
+			healthBureauDao.updateObeject(healthBureau);
+			ret = true;
+		}
+		
+		return ret;
+	}
+	
+	/**
+	 * 根据id获取对象
+	 * @param id
+	 * @return
+	 */
+	private Object getObejectById(String id) {
+		
+		return healthBureauDao.getPasswdById(HealthBureau.class, id);
+	}
 
 	/**
 	 * 查询单个药品service层
@@ -44,7 +68,9 @@ public class healthBureauServiceImpl implements healthBureauService{
 	 * 插入药品
 	 * @param medicine
 	 */
-	public void txinsertMedicine(MedicineDto medicineDto){
+	public boolean txinsertMedicine(MedicineDto medicineDto){
+		boolean ret = false;
+		
 		Medicine medicine = new Medicine();
 		
 		medicine.setManufacturer(medicineDto.getManufacturer());
@@ -55,8 +81,12 @@ public class healthBureauServiceImpl implements healthBureauService{
 		medicine.setStockBalance(medicineDto.getStock_Balance());
 		medicine.setType(medicineDto.getType());
 		
-		healthBureauDao.insertMedicine(medicine);
-		System.out.println("insert services");
+		ret = healthBureauDao.insertMedicine(medicine);
+		if(!ret){
+			ret = true;
+		}
+		
+		return ret;
 	}
 	
 	/**
@@ -153,7 +183,6 @@ public class healthBureauServiceImpl implements healthBureauService{
 	 */
 	public void updateMedicine(MedicineDto medicineDto) {
 		Medicine medicine;
-		System.out.println("service");
 		
 		medicine = healthBureauDao.searchSingleMedicineByNumber(medicineDto.getNumber());	//对象必须从find等语句查得的，不可new出来的，不然无法更新
 		medicine.setManufacturer(medicineDto.getManufacturer());
@@ -163,13 +192,10 @@ public class healthBureauServiceImpl implements healthBureauService{
 		medicine.setStatus(medicineDto.getStatus());
 		medicine.setStockBalance(medicineDto.getStock_Balance());
 		medicine.setType(medicineDto.getType());
-		System.out.println(medicine.getNumber());
 		
 		medicine.setStatus("0");		//设置medicine为可更新的状态
 		
-		System.out.println("service start");
 		healthBureauDao.updateMedicine(medicine);
-		System.out.println("service end");
 		
 	}
 	
@@ -276,7 +302,6 @@ public class healthBureauServiceImpl implements healthBureauService{
 			order_Id = ((Order)searchOrders(null, 5, page, 100).getList().get(0)).getId();		//orderItemDto为null时，直接获取第一条订单的id为参数
 		}else {
 			order_Id = orderItemDto.getOrder().getId();		//orderItemDto不为为null时，根据orderItemDto的id作为为参数来查询
-			System.out.println(order_Id);
 		}
 		
 		List<Object> values = new ArrayList<Object>();

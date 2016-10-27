@@ -15,7 +15,7 @@ public interface healthBureauService {
 	public PageBean searchMedicines(MedicineDto medicineDto,int pageSize,int count);
 	public void updateMedicine(MedicineDto medicineDto);
 	public void deleteMedicineByNumber(MedicineDto medicineDto);
-	public void txinsertMedicine(MedicineDto medicineDto);
+	public boolean txinsertMedicine(MedicineDto medicineDto);
 	public int getMedicineCount();
 	public PageBean searchOrders(OrderDto orderDto, int pageSize, int page, int code);
 	public void txupdateOrder(OrderDto orderDto);
@@ -23,5 +23,6 @@ public interface healthBureauService {
 	public void txdeleteOrderById(OrderDto orderDto);
 	public void txupdateOrder_status(OrderDto orderDto);
 	public List<Object> searchOrderItems(OrderItemDto orderItemDto ,int pageSize, int page);
+	public boolean txmodify_passwd(String id, String oldPasswd, String newPasswd);
 
 }

@@ -25,7 +25,7 @@ public class HealthBureauActionTest extends BaseJunit4Test{
 		medicine.setManufacturer(manufacturer);
 		medicine.setStock_Balance("70");
 		medicine.setType("类型4");
-		action.insertMedicine();
+//		action.insertMedicine();
 	}
 
 }
